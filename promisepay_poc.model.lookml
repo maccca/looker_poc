@@ -122,6 +122,11 @@
       type: left_outer 
       sql_on: ${milestones.payment_type_id} = ${payment_types.id}
       relationship: many_to_one
+      
+    - join: currencies
+      type: left_outer
+      sql_on: ${accounts.currency_id} = ${currencies.id}
+      relationship: many_to_one
 # 
 # 
 # - explore: addresses

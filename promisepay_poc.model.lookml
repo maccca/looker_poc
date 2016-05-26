@@ -81,42 +81,47 @@
 
 # - explore: account_types
 #
-# - explore: accounts
-#   joins:
+- explore: accounts
+  joins:
 #     - join: users
 #       type: left_outer 
 #       sql_on: ${accounts.user_id} = ${users.id}
 #       relationship: many_to_one
-# 
+
+    - join: legal_entities
+      type: left_outer 
+      sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+      
+    - join: milestones
+      type: left_outer 
+      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
+
 #     - join: milestones
 #       type: left_outer 
 #       sql_on: ${accounts.milestone_id} = ${milestones.id}
 #       relationship: many_to_one
-# 
-#     - join: account_types
-#       type: left_outer 
-#       sql_on: ${accounts.account_type_id} = ${account_types.id}
-#       relationship: many_to_one
-# 
-#     - join: marketplaces
-#       type: left_outer 
-#       sql_on: ${users.marketplace_id} = ${marketplaces.alt_marketplace_id}
-#       relationship: many_to_one
-# 
-#     - join: business_informations
-#       type: left_outer 
-#       sql_on: ${marketplaces.business_information_id} = ${business_informations.id}
-#       relationship: many_to_one
-# 
-#     - join: agreements
-#       type: left_outer 
-#       sql_on: ${milestones.agreement_id} = ${agreements.id}
-#       relationship: many_to_one
-# 
-#     - join: payment_types
-#       type: left_outer 
-#       sql_on: ${milestones.payment_type_id} = ${payment_types.id}
-#       relationship: many_to_one
+      
+    - join: account_types
+      type: left_outer 
+      sql_on: ${accounts.account_type_id} = ${account_types.id}
+      relationship: many_to_one
+
+    - join: users
+      type: left_outer
+      sql_on: ${legal_entities.principal_id} = ${users.id}
+      relationship: many_to_one
+
+    - join: marketplaces
+      type: left_outer 
+      sql_on: ${users.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
+
+    - join: payment_types
+      type: left_outer 
+      sql_on: ${milestones.payment_type_id} = ${payment_types.id}
+      relationship: many_to_one
 # 
 # 
 # - explore: addresses

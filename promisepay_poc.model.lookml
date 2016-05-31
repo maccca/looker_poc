@@ -69,35 +69,15 @@
 
 - explore: transaction_pendings
 
+- explore: milestones
 
-# - explore: transaction_entries
-#   joins:
-#     - join: accounts
-#       type: left_outer
-#       sql_on: ${transaction_entries.account_id} = ${accounts.id}
-#       relationship: many_to_one
-#       
-#     - join: legal_entities
-#       type: left_outer
-#       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
-#       relationship: many_to_one
-#  
-#     - join: currencies
-#       type: left_outer
-#       sql_on: ${accounts.currency_id} = ${currencies.id}
-#       relationship: many_to_one
-#       
-#     - join: marketplaces
-#       type: left_outer
-#       sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
-#       
-#     - join: milestones
-#       type: left_outer
-#       sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
-#       relationship: one_to_many    
+- explore: transaction_entries
+  joins:
+    - join: accounts
+      type: left_outer
+      sql_on: ${transaction_entries.account_id} = ${accounts.id}
+      relationship: many_to_one
 
-# - explore: account_types
-#
 - explore: accounts
   joins:
 #     - join: users

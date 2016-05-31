@@ -20,6 +20,11 @@
       type: left_outer
       sql_on: ${users.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+      
+    - join: milestones
+      type: left_outer 
+      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
 
 - explore: marketplaces
   joins:
@@ -33,26 +38,38 @@
       sql_on: ${legal_entities.principal_id} = ${users.id}
       relationship: many_to_one
       
-    - join: accounts
-      type: left_outer
-      sql_on: ${legal_entities.id} = ${accounts.legal_entity_id}
-      relationship: one_to_many
-  
-    - join: currencies
-      type: left_outer
-      sql_on: ${accounts.currency_id} = ${currencies.id}
-      relationship: many_to_one
-      
     - join: milestones
       type: left_outer
       sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
       relationship: one_to_many
       
+    - join: accounts
+      type: left_outer
+      sql_on: ${milestones.contractor_legal_entity_id} = ${accounts.legal_entity_id}
+      relationship: one_to_many
+      
+    - join: currencies
+      type: left_outer
+      sql_on: ${accounts.currency_id} = ${currencies.id}
+      relationship: many_to_one      
+      
     - join: transaction_entries
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
+      
+- explore: users
+  joins:
+    - join: legal_entities
+      type: left_outer
+      sql_on: ${users.id} = ${legal_entities.principal_id}
+      relationship: one_to_many
     
+- explore: agreements
+
+- explore: transaction_pendings
+
+
 # - explore: transaction_entries
 #   joins:
 #     - join: accounts
@@ -98,11 +115,6 @@
       sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
 
-#     - join: milestones
-#       type: left_outer 
-#       sql_on: ${accounts.milestone_id} = ${milestones.id}
-#       relationship: many_to_one
-      
     - join: account_types
       type: left_outer 
       sql_on: ${accounts.account_type_id} = ${account_types.id}
@@ -115,7 +127,7 @@
 
     - join: marketplaces
       type: left_outer 
-      sql_on: ${users.marketplace_id} = ${marketplaces.id}
+      sql_on: ${milestones.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
 
     - join: payment_types
@@ -126,6 +138,11 @@
     - join: currencies
       type: left_outer
       sql_on: ${accounts.currency_id} = ${currencies.id}
+      relationship: many_to_one
+      
+    - join: transaction_entries
+      type: left_outer
+      sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
 # 
 # 

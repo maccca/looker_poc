@@ -77,7 +77,14 @@
       type: left_outer
       sql_on: ${transaction_entries.account_id} = ${accounts.id}
       relationship: many_to_one
-
+      
+- explore: security_checks
+  joins: 
+    - join: legal_entities
+      type: left_outer
+      sql_on: ${legal_entities.uuid} = ${security_checks.external_id}
+      relationship: many_to_many
+      
 - explore: accounts
   joins:
 #     - join: users

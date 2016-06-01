@@ -78,7 +78,11 @@
 
   - dimension: uuid
     type: string
-    sql: ${TABLE}.uuid
+    sql: ${TABLE}.uuid::varchar
+    links:
+    - label: Ops Center
+      url: https://ops.promisepay.com/legal_entities/{{ value }}
+      icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
 
   - measure: count
     type: count

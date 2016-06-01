@@ -137,6 +137,11 @@
   - dimension: uuid
     type: string
     sql: ${TABLE}.uuid
+    links:
+    - label: Ops Center
+      url: https://ops.promisepay.com/milestones/{{ value }}
+      icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
+    
 
   - measure: count
     type: count

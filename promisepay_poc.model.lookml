@@ -70,6 +70,23 @@
 - explore: transaction_pendings
 
 - explore: milestones
+  joins:
+    - join: contractor_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
+      
+    - join: client_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
+      relationship: many_to_one   
+      
+    - join: marketplaces
+      type: left_outer
+      sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
+      relationship: one_to_many
 
 - explore: transaction_entries
   joins:

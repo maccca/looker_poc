@@ -26,8 +26,14 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, raw]
     sql: ${TABLE}.created_at
+
+  - dimension: is_mtd
+    type: yesno
+    sql: |
+      (EXTRACT(MONTH FROM ${created_raw}) = EXTRACT(MONTH FROM CURRENT_TIMESTAMP) AND
+       EXTRACT(YEAR FROM ${created_raw}) = EXTRACT(YEAR FROM CURRENT_TIMESTAMP))
 
   - dimension: currency_id
     type: number
@@ -97,6 +103,11 @@
   - dimension: uuid
     type: string
     sql: ${TABLE}.uuid
+    
+  - dimension: currency_control
+    sql_case:
+      USD: ${currency_id} = 2 AND ${accounts.id = 4}
+      AUD: ${currency_id} = 1 AND ${accounts.id = 3} 
 
   - measure: count
     type: count
@@ -104,7 +115,12 @@
 
   - measure: total_amount
     type: sum
-    sql: ${amount}
+    sql: ${amount}*1.0 / 100
+
+  - measure: total_amount_in_millions
+    type: sum
+    sql: ${amount} * 1.0 / (100 * 1000000)
+    value_format: '#.000 "M"'
 
   # ----- Sets of fields for drilling ------
   sets:

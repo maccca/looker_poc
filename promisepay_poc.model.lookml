@@ -95,6 +95,16 @@
       sql_on: ${transaction_entries.account_id} = ${accounts.id}
       relationship: many_to_one
       
+    - join: legal_entities
+      type: left_outer
+      sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
+      relationship: one_to_one
+      
+    - join: currencies
+      type: left_outer
+      sql_on: ${transaction_entries.currency_id} = ${currencies.id}
+      relationship: one_to_one
+
 - explore: security_checks
   joins: 
     - join: legal_entities

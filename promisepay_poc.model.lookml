@@ -89,6 +89,7 @@
       relationship: one_to_many
 
 - explore: transaction_entries
+#  access_filter_fields: [transaction_entries.marketplace_id]
   joins:
     - join: accounts
       type: left_outer

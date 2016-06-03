@@ -151,6 +151,9 @@
     type: sum
     sql: ${cost}
 
+  - measure: latest_created_date
+    type: string
+    sql: MAX(${created_date})
 
   # ----- Sets of fields for drilling ------
   sets:

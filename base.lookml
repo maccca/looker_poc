@@ -88,6 +88,18 @@
       sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
       relationship: one_to_many
 
+    - join: contractor_user
+      from: users
+      type: left_outer
+      sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user.id}
+      relationship: many_to_one
+      
+    - join: client_user
+      from: users
+      type: left_outer
+      sql_on: ${client_legal_entities.principal_id} = ${client_user.id}
+      relationship: many_to_one
+
 - explore: transaction_entries_base
   extension: required
 #  access_filter_fields: [transaction_entries.marketplace_id]

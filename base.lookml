@@ -127,6 +127,26 @@
       sql_on: ${legal_entities.uuid} = ${security_checks.external_id}
       relationship: many_to_many
       
+    - join: users
+      type: left_outer
+      sql_on: ${legal_entities.principal_id} = ${users.id}
+      relationship: many_to_one
+      
+    - join: companies
+      type: left_outer
+      sql_on: ${legal_entities.company_id} = ${companies.id}
+      relationship: many_to_one
+      
+    - join: accounts
+      type: left_outer
+      sql_on: ${legal_entities.id} = ${accounts.legal_entity_id}
+      relationship: one_to_many
+      
+    - join: marketplaces
+      type: left_outer
+      sql_on: ${users.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
+      
 - explore: accounts_base
   extension: required
   joins:

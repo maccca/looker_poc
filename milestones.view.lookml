@@ -155,6 +155,11 @@
     type: string
     sql: MAX(${created_date})
 
+#   - measure: latest_description
+#     value: ${description}
+#     type: string
+#     sql: MAX(${created_date})
+
   # ----- Sets of fields for drilling ------
   sets:
     detail:

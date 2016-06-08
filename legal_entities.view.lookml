@@ -11,6 +11,7 @@
 
   - dimension: annual_credit_card_volume
     type: number
+    view_label: next_kyc_threshold
     sql: ${TABLE}.annual_credit_card_volume
 
   - dimension: company_id
@@ -58,6 +59,10 @@
   - dimension: name
     type: string
     sql: ${TABLE}.name
+    links:
+    - label: Ops Center
+      url: https://ops.promisepay.com/legal_entities/{{ uuid._value }}
+      icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
 
   - dimension: payment_account_id
     type: number
@@ -87,4 +92,3 @@
   - measure: count
     type: count
     drill_fields: [external_legal_entity_id, name]
-

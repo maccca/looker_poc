@@ -194,3 +194,8 @@
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
+
+    - join: transaction_pendings
+      type: left_outer
+      sql_on: ${accounts.id} = ${transaction_pendings.account_from_id}
+      relationship: many_to_one

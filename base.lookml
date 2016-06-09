@@ -197,5 +197,23 @@
 
     - join: transaction_pendings
       type: left_outer
-      sql_on: ${accounts.id} = ${transaction_pendings.account_from_id}
+      sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
       relationship: many_to_one
+
+- explore: legal_entities_accounts
+  extension: required
+  joins:
+  - join: legal_entities
+    type: left_outer 
+    sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
+    relationship: many_to_one
+    
+  - join: account_types
+    type: left_outer 
+    sql_on: ${accounts.account_type_id} = ${account_types.id}
+    relationship: many_to_one
+
+  - join: currencies
+    type: left_outer
+    sql_on: ${accounts.currency_id} = ${currencies.id}
+    relationship: many_to_one

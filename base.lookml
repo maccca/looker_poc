@@ -67,6 +67,30 @@
 
 - explore: transaction_pendings_base
   extension: required
+  joins:
+    - join: account_lookup
+      type: inner
+      view_label: "Transaction Pendings"
+      sql_on: ${account_lookup.account_id} = ${transaction_pendings.account_to_id}
+      relationship: many_to_one
+
+
+- explore: transaction_entries_and_related_base
+  extension: required
+  joins:
+    - join: transaction_pendings
+      type: left_outer
+      sql_on: ${transaction_entries_and_related.account_to_id} = ${transaction_pendings.account_from_id}
+      relationship: many_to_one
+
+    - join: account_lookup
+      type: inner
+      view_label: "Transaction Pendings"
+      sql_on: ${account_lookup.account_id} = ${transaction_pendings.account_to_id}     
+      relationship: many_to_one
+    
+      
+  
 
 - explore: milestones_base
   extension: required

@@ -64,30 +64,41 @@
     
 - explore: agreements_base
   extension: required
-
+  
 - explore: transaction_pendings_base
   extension: required
-  joins:
-    - join: account_lookup
-      type: inner
-      view_label: "Transaction Pendings"
-      sql_on: ${account_lookup.account_id} = ${transaction_pendings.account_to_id}
-      relationship: many_to_one
 
-
-- explore: transaction_entries_and_related_base
+- explore: monthly_fee_report_base
   extension: required
-#   always_filter: 
-#     marketplace_filter: 'Airtasker'
   joins:
-    - join: transaction_pendings_and_accounts
-      type: left_outer
-      fields: [marketplace_filter]
-      sql_on: ${transaction_entries_and_related.account_from_id} = ${transaction_pendings_and_accounts.account_from_id}
-      relationship: one_to_one
-
+    - join: from_accounts
+      from: accounts
+      sql_on: ${monthly_fee_report.account_from_id} = ${from_accounts.id}
+      relationship: many_to_one
+      fields: []
       
-  
+    - join: to_accounts
+      from: accounts
+      sql_on: ${monthly_fee_report.account_to_id} = ${to_accounts.id}
+      relationship: many_to_one
+      fields: []
+      
+    - join: from_account_milestones
+      view_label: "Milestones (from acct)"
+      from: milestones
+      sql_on: ${from_accounts.milestone_id} = ${from_account_milestones.id}
+      relationship: one_to_many
+      
+    - join: to_account_milestones
+      view_label: "Milestones (to acct)"
+      from: milestones
+      sql_on: ${to_accounts.milestone_id} = ${to_account_milestones.id}
+      relationship: one_to_many
+      
+    
+
+
+
 
 - explore: milestones_base
   extension: required

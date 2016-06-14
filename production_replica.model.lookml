@@ -31,36 +31,11 @@
 - explore: security_checks
   extends: security_checks_base
   
-- explore: transaction_entries_and_related
-  extends: transaction_entries_and_related_base
   
-- explore: monthly_fee_report
-  joins:
-    - join: from_accounts
-      from: accounts
-      sql_on: ${monthly_fee_report.account_from_id} = ${from_accounts.id}
-      relationship: many_to_one
-      fields: []
-      
-    - join: to_accounts
-      from: accounts
-      sql_on: ${monthly_fee_report.account_from_id} = ${to_accounts.id}
-      relationship: many_to_one
-      fields: []
-      
-    - join: from_account_milestones
-      view_label: "Milestones (from acct)"
-      from: milestones
-      sql_on: ${from_accounts.milestone_id} = ${from_account_milestones.id}
-      relationship: one_to_many
-      
-    - join: to_account_milestones
-      view_label: "Milestones (to acct)"
-      from: milestones
-      sql_on: ${to_accounts.milestone_id} = ${to_account_milestones.id}
-      relationship: one_to_many
-      
-    
+- explore: monthly_fee_report  
+  extends: monthly_fee_report_base
+  
+
 
       
   

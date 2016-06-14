@@ -3,13 +3,13 @@
   derived_table:
     sql: |
       SELECT 
-      a.account_id as account_from_id,
-      b.account_id as account_to_id,
-      a.currency_id as currency_id,
-      a.amount as amount
-      FROM transaction_entries a
-      LEFT JOIN transaction_entries b
-      ON a.related_transaction_id = b.related_transaction_id
+      te1.account_id as account_from_id,
+      te2.account_id as account_to_id,
+      te2.amount as amount
+      FROM transaction_entries te1
+      LEFT JOIN transaction_entries te2
+      ON te1.related_transaction_id = te2.id
+      
 
   fields:
   - measure: count

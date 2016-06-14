@@ -77,18 +77,15 @@
 
 - explore: transaction_entries_and_related_base
   extension: required
+#   always_filter: 
+#     marketplace_filter: 'Airtasker'
   joins:
-    - join: transaction_pendings
+    - join: transaction_pendings_and_accounts
       type: left_outer
-      sql_on: ${transaction_entries_and_related.account_to_id} = ${transaction_pendings.account_from_id}
-      relationship: many_to_one
+      fields: [marketplace_filter]
+      sql_on: ${transaction_entries_and_related.account_from_id} = ${transaction_pendings_and_accounts.account_from_id}
+      relationship: one_to_one
 
-    - join: account_lookup
-      type: inner
-      view_label: "Transaction Pendings"
-      sql_on: ${account_lookup.account_id} = ${transaction_pendings.account_to_id}     
-      relationship: many_to_one
-    
       
   
 

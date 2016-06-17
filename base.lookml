@@ -204,10 +204,16 @@
       type: left_outer 
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
+   
+#    - join: to_account_milestones
+#       view_label: "Milestones (to acct)"
+#       from: milestones
+#       sql_on: ${to_accounts.milestone_id} = ${to_account_milestones.id}
+#       relationship: one_to_many
       
     - join: milestones
       type: left_outer 
-      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
+      sql_on: ${accounts.legal_entity_id} = ${milestones.client_legal_entity_id}
       relationship: many_to_one
 
     - join: account_types

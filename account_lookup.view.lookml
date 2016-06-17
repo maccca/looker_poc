@@ -9,6 +9,9 @@
       LEFT JOIN accounts
       ON legal_entities.id = accounts.legal_entity_id
       WHERE {% condition marketplace_filter %} marketplaces.name {% endcondition %}
+      AND active = 't'
+      AND account_type_id >= 9100 
+      AND account_type_id < 9199
       
   fields:
   

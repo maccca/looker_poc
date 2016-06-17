@@ -31,5 +31,11 @@
 - explore: security_checks
   extends: security_checks_base
   
-- explore: transaction_entries_and_related
-  extends: transaction_entries_and_related_base
+  
+- explore: monthly_fee_report  
+  extends: monthly_fee_report_base
+  
+
+
+      
+  

@@ -89,8 +89,6 @@
       sql_on: ${account_lookup.account_id} = ${transaction_pendings.account_to_id}     
       relationship: many_to_one
     
-      
-  
 
 - explore: milestones_base
   extension: required
@@ -100,7 +98,18 @@
       type: left_outer
       sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
-      
+
+    - join: accounts
+      type: left_outer
+      sql_on: ${milestones.id} = ${accounts.milestone_id}
+      relationship: one_to_many
+
+    - join: milestones_balance
+      type: inner
+      view_label: "Milestones"
+      sql_on: ${milestones_balance.milestone_id} = ${milestones.id}
+      relationship: one_to_one
+
     - join: client_legal_entities
       from: legal_entities
       type: left_outer

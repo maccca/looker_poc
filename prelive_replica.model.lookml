@@ -30,3 +30,6 @@
   
 - explore: security_checks
   extends: security_checks_base
+  
+- explore: goodguys_airtasker_disbursements
+  extends: goodguys_airtasker_disbursements_base

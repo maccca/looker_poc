@@ -1,3 +1,6 @@
+- explore: goodguys_airtasker_disbursements_base
+  extension: required
+
 - explore: legal_entities_base
   extension: required
   joins:

@@ -213,7 +213,7 @@
       
     - join: milestones
       type: left_outer 
-      sql_on: ${accounts.legal_entity_id} = ${milestones.client_legal_entity_id}
+      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
 
     - join: account_types

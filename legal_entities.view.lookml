@@ -64,7 +64,8 @@
     - label: Ops Center
       url: https://ops.promisepay.com/legal_entities/{{ uuid._value }}
       icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
-
+    html: |
+      <a href="https://ops.promisepay.com/legal_entities/{{ uuid._value }}">{{ value }}</a>
   - dimension: payment_account_id
     type: number
     sql: ${TABLE}.payment_account_id
@@ -89,6 +90,8 @@
     - label: Ops Center
       url: https://ops.promisepay.com/legal_entities/{{ value }}
       icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
+    html: |
+      <a href="https://ops.promisepay.com/legal_entities/{{ value }}">{{ value }}</a>
 
   - measure: count
     type: count

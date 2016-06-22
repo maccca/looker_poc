@@ -17,7 +17,8 @@
 
   - dimension: amount
     type: number
-    sql: ${TABLE}.amount
+    sql: ${TABLE}.amount / 100
+    value_format: '$#,##0.00'
 
   - dimension: bank_account_details
     type: string

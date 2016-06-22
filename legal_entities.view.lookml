@@ -12,7 +12,8 @@
   - dimension: annual_credit_card_volume
     type: number
     view_label: next_kyc_threshold
-    sql: ${TABLE}.annual_credit_card_volume
+    sql: ${TABLE}.annual_credit_card_volume / 100
+    value_format: '$0'
 
   - dimension: company_id
     type: number

@@ -116,7 +116,7 @@
 
     - join: accounts
       type: left_outer
-      sql_on: ${milestones.id} = ${accounts.milestone_id}
+      sql_on: ${contractor_legal_entities.id} = ${accounts.legal_entity_id}
       relationship: one_to_many
 
     - join: milestones_balance

@@ -149,7 +149,8 @@
     
   - measure: total_cost
     type: sum
-    sql: ${cost}
+    sql: ${cost} / 100
+    value_format: '$0.00'
 
   - measure: latest_created_date
     type: string

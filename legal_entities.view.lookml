@@ -13,7 +13,7 @@
     type: number
     view_label: next_kyc_threshold
     sql: ${TABLE}.annual_credit_card_volume / 100
-    value_format: '$0'
+    value_format: '$#,##0.00'
 
   - dimension: company_id
     type: number

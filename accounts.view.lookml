@@ -13,12 +13,12 @@
 
   - dimension: active
     type: yesno
-    sql: ${TABLE}.active
+    sql: ${TABLE}.active = 'true'
 
   - dimension: amount
     type: number
     sql: ${TABLE}.amount / 100
-    value_format: '$#,##0.00'
+    value_format_name: usd_0
 
   - dimension: bank_account_details
     type: string

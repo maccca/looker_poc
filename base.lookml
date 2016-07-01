@@ -70,6 +70,42 @@
   
 - explore: transaction_pendings_base
   extension: required
+  joins:
+    - join: accounts_from
+      from: accounts
+      type: inner
+      sql_on: ${transaction_pendings.account_from_id} = ${accounts_from.id}
+      relationship: many_to_one
+      
+    - join: accounts_to
+      from: accounts
+      type: inner
+      sql_on: ${transaction_pendings.account_to_id} = ${accounts_to.id}
+      relationship: many_to_one
+      
+    - join: transaction_entries
+      type: left_outer
+      relationship: many_to_many
+      sql_on: ${transaction_entries.account_id} = ${transaction_pendings.account_from_id} 
+ 
+    - join: transaction_entries_relationship
+      from: transaction_entries
+      relationship: many_to_many
+      sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
+      
+#     - join: legal_entities
+#       type: left_outer
+#       sql_on: ${accounts_from.legal_entity_id} = ${legal_entities.id}
+#       relationship: many_to_one
+#     
+#     - join: marketplaces
+#       sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
+#       relationship: one_to_one
+# 
+#     - join: currencies
+#       type: left_outer
+#       sql_on: ${transaction_entries.currency_id} = ${currencies.id}
+#       relationship: one_to_one
 
 - explore: monthly_fee_report_base
   extension: required
@@ -149,9 +185,20 @@
       relationship: many_to_one
 
 - explore: transaction_entries_base
+  from: transaction_entries
+  view: transaction_entries
   extension: required
 #  access_filter_fields: [transaction_entries.marketplace_id]
   joins:
+    - join: transaction_entries_relationship
+      from: transaction_entries
+      relationship: one_to_one
+      sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
+      
+    - join: transaction_pendings
+      sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
+      relationship: one_to_many
+      
     - join: accounts
       type: left_outer
       sql_on: ${transaction_entries.account_id} = ${accounts.id}
@@ -160,8 +207,12 @@
     - join: legal_entities
       type: left_outer
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+    
+    - join: marketplaces
+      sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
       relationship: one_to_one
-      
+
     - join: currencies
       type: left_outer
       sql_on: ${transaction_entries.currency_id} = ${currencies.id}

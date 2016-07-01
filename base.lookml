@@ -93,19 +93,19 @@
       relationship: many_to_many
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
       
-#     - join: legal_entities
-#       type: left_outer
-#       sql_on: ${accounts_from.legal_entity_id} = ${legal_entities.id}
-#       relationship: many_to_one
-#     
-#     - join: marketplaces
-#       sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
-#       relationship: one_to_one
-# 
-#     - join: currencies
-#       type: left_outer
-#       sql_on: ${transaction_entries.currency_id} = ${currencies.id}
-#       relationship: one_to_one
+    - join: legal_entities
+      type: left_outer
+      sql_on: ${accounts_from.legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+    
+    - join: marketplaces
+      sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
+      relationship: one_to_one
+
+    - join: currencies
+      type: left_outer
+      sql_on: ${transaction_entries.currency_id} = ${currencies.id}
+      relationship: one_to_one
 
 - explore: monthly_fee_report_base
   extension: required

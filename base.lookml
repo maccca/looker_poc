@@ -107,6 +107,18 @@
       sql_on: ${transaction_entries.currency_id} = ${currencies.id}
       relationship: one_to_one
 
+    - join: milestones_to
+      from: milestones
+      type: left_outer
+      sql_on: ${accounts_to.milestone_id} = ${milestones_to.id}
+      relationship: many_to_many
+
+    - join: milestones_from
+      from: milestones
+      type: left_outer
+      sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
+      relationship: many_to_many
+
 - explore: monthly_fee_report_base
   extension: required
   joins:

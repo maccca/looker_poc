@@ -115,7 +115,7 @@
 
   - measure: total_amount
     type: sum
-    sql: ${amount}*1.0 / 100
+    sql: abs(${amount}*1.0 / 100)
     value_format_name: usd
 
   - measure: total_amount_in_millions

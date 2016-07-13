@@ -222,7 +222,7 @@
       relationship: many_to_one
     
     - join: marketplaces
-      sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
+      sql_on: ${transaction_entries.legal_entity_id} = ${marketplaces.legal_entity_id}
       relationship: one_to_one
 
     - join: currencies
@@ -279,7 +279,7 @@
       
     - join: milestones
       type: left_outer 
-      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
+      sql_on: ${accounts.milestone_id} = ${milestones.id}
       relationship: many_to_one
 
     - join: account_types

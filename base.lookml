@@ -276,6 +276,18 @@
       type: left_outer 
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
+      
+    - join: contractor_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
+
+    - join: client_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
+      relationship: many_to_one 
    
 #    - join: to_account_milestones
 #       view_label: "Milestones (to acct)"

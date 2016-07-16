@@ -296,7 +296,7 @@
     - join: users
       type: left_outer
       sql_on: ${legal_entities.principal_id} = ${users.id}
-      relationship: many_to_one
+      relationship: many_to_one   
 
     - join: marketplaces
       type: left_outer 

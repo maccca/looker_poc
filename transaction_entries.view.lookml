@@ -118,7 +118,7 @@
     sql: abs(${amount}*1.0 / 100)
     value_format_name: usd
     
-  - measure: total_difference
+  - measure: escrow_total
     type: sum
     sql: ${amount}*1.0 / 100
     value_format_name: usd

@@ -86,7 +86,7 @@
     - join: transaction_entries
       type: left_outer
       relationship: many_to_many
-      sql_on: ${transaction_entries.account_id} = ${transaction_pendings.account_from_id} 
+      sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id} 
  
     - join: transaction_entries_relationship
       from: transaction_entries

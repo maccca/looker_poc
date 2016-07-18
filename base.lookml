@@ -216,13 +216,19 @@
       sql_on: ${transaction_entries.account_id} = ${accounts.id}
       relationship: many_to_one
       
+    - join: related_accounts
+      from: accounts
+      type: left_outer
+      sql_on: ${transaction_entries_relationship.account_id} = ${related_accounts.id}
+      relationship: many_to_one
+      
     - join: legal_entities
       type: left_outer
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
     
     - join: marketplaces
-      sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
+      sql_on: ${transaction_entries.legal_entity_id} = ${marketplaces.legal_entity_id}
       relationship: one_to_one
 
     - join: currencies
@@ -270,6 +276,18 @@
       type: left_outer 
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
+      
+    - join: contractor_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
+
+    - join: client_legal_entities
+      from: legal_entities
+      type: left_outer
+      sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
+      relationship: many_to_one 
    
 #    - join: to_account_milestones
 #       view_label: "Milestones (to acct)"
@@ -279,7 +297,7 @@
       
     - join: milestones
       type: left_outer 
-      sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
+      sql_on: ${accounts.milestone_id} = ${milestones.id}
       relationship: many_to_one
 
     - join: account_types
@@ -290,7 +308,7 @@
     - join: users
       type: left_outer
       sql_on: ${legal_entities.principal_id} = ${users.id}
-      relationship: many_to_one
+      relationship: many_to_one   
 
     - join: marketplaces
       type: left_outer 

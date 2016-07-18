@@ -18,7 +18,7 @@
   - dimension: amount
     type: number
     sql: ${TABLE}.amount / 100
-    value_format_name: usd_0
+    value_format_name: usd
 
   - dimension: bank_account_details
     type: string
@@ -79,6 +79,11 @@
   - measure: count
     type: count
     drill_fields: detail*
+    
+  - measure: total_amount
+    type: sum
+    sql: ${TABLE}.amount*1.0 / 100
+    value_format_name: usd
 
 
   # ----- Sets of fields for drilling ------

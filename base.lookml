@@ -216,6 +216,11 @@
       sql_on: ${transaction_entries.account_id} = ${accounts.id}
       relationship: many_to_one
       
+    - join: milestones
+      type: left_outer 
+      sql_on: ${accounts.milestone_id} = ${milestones.id}
+      relationship: many_to_one
+      
     - join: related_accounts
       from: accounts
       type: left_outer

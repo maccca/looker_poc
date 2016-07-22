@@ -118,6 +118,11 @@
     sql: abs(${amount}*1.0 / 100)
     value_format_name: usd
     
+  - dimension: formatted_amount
+    type: number
+    sql: abs(${TABLE}.amount*1.0 / 100)
+    value_format_name: usd
+    
   - measure: escrow_total
     type: sum
     sql: ${amount}*1.0 / 100

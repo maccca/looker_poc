@@ -227,6 +227,11 @@
       sql_on: ${transaction_entries_relationship.account_id} = ${related_accounts.id}
       relationship: many_to_one
       
+    - join: related_marketplaces
+      from: marketplaces
+      sql_on: ${transaction_entries_relationship.legal_entity_id} = ${related_marketplaces.legal_entity_id}
+      relationship: one_to_one
+      
     - join: legal_entities
       type: left_outer
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}

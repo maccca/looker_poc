@@ -73,6 +73,11 @@
   - dimension: uuid
     type: string
     sql: ${TABLE}.uuid
+    
+  - dimension: formatted_amount
+    type: number
+    sql: abs(${TABLE}.amount*1.0 / 100)
+    value_format_name: usd
 
   - measure: count
     type: count

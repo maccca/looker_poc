@@ -229,7 +229,7 @@
       
     - join: related_marketplaces
       from: marketplaces
-      sql_on: ${transaction_entries_relationship.legal_entity_id} = ${related_marketplaces.legal_entity_id}
+      sql_on: ${transaction_entries_relationship.marketplace_id} = ${related_marketplaces.id}
       relationship: one_to_one
       
     - join: legal_entities
@@ -238,7 +238,7 @@
       relationship: many_to_one
     
     - join: marketplaces
-      sql_on: ${transaction_entries.legal_entity_id} = ${marketplaces.legal_entity_id}
+      sql_on: ${transaction_entries.marketplace_id} = ${marketplaces.id}
       relationship: one_to_one
 
     - join: currencies

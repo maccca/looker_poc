@@ -119,6 +119,8 @@
     value_format_name: usd
     
   - dimension: formatted_amount
+    label: 'Amount'
+    view_label: ''
     type: number
     sql: abs(${TABLE}.amount*1.0 / 100)
     value_format_name: usd

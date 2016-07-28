@@ -2,6 +2,7 @@
   extension: required
 
 - explore: legal_entities_base
+  view_label: ''
   extension: required
   joins:
     - join: users
@@ -20,14 +21,17 @@
       relationship: many_to_one
       
     - join: milestones
+      view_label: 'Items'
       type: left_outer 
       sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
 
 - explore: marketplaces_base
+  view_label: ''
   extension: required
   joins:
     - join: legal_entities
+      view_label: 'Users'
       type: inner
       sql_on: ${marketplaces.legal_entity_id} = ${legal_entities.id}
       relationship: one_to_one
@@ -38,6 +42,7 @@
       relationship: many_to_one
       
     - join: milestones
+      view_label: 'Items'
       type: left_outer
       sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
       relationship: one_to_many
@@ -53,14 +58,17 @@
       relationship: many_to_one      
       
     - join: transaction_entries
+      view_label: ''
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
       
 - explore: users_base
   extension: required
+  view_label: ''
   joins:
     - join: legal_entities
+      view_label: 'Users'
       type: left_outer
       sql_on: ${users.id} = ${legal_entities.principal_id}
       relationship: one_to_many
@@ -70,6 +78,7 @@
   
 - explore: transaction_pendings_base
   extension: required
+  view_label: ''
   joins:
     - join: accounts_from
       from: accounts
@@ -84,16 +93,19 @@
       relationship: many_to_one
       
     - join: transaction_entries
+      view_label: ''
       type: left_outer
       relationship: many_to_many
       sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id} 
  
     - join: transaction_entries_relationship
+      view_label: ''
       from: transaction_entries
       relationship: many_to_many
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
       
     - join: legal_entities
+      view_label: 'Users'
       type: left_outer
       sql_on: ${accounts_from.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
@@ -108,12 +120,14 @@
       relationship: one_to_one
 
     - join: milestones_to
+      view_label: 'Items'
       from: milestones
       type: left_outer
       sql_on: ${accounts_to.milestone_id} = ${milestones_to.id}
       relationship: many_to_many
 
     - join: milestones_from
+      view_label: 'Items'
       from: milestones
       type: left_outer
       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
@@ -141,13 +155,13 @@
       fields: []
       
     - join: from_account_milestones
-      view_label: "Milestones (from acct)"
+      view_label: "Items (from acct)"
       from: milestones
       sql_on: ${from_accounts.milestone_id} = ${from_account_milestones.id}
       relationship: one_to_many
       
     - join: to_account_milestones
-      view_label: "Milestones (to acct)"
+      view_label: "Items (to acct)"
       from: milestones
       sql_on: ${to_accounts.milestone_id} = ${to_account_milestones.id}
       relationship: one_to_many
@@ -155,8 +169,10 @@
     
 - explore: milestones_base
   extension: required
+  view_label: ''
   joins:
     - join: contractor_legal_entities
+      view_label: 'Users (Merchant)'
       from: legal_entities
       type: left_outer
       sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
@@ -169,11 +185,12 @@
 
     - join: milestones_balance
       type: inner
-      view_label: "Milestones"
+      view_label: "Items"
       sql_on: ${milestones_balance.milestone_id} = ${milestones.id}
       relationship: one_to_one
 
     - join: client_legal_entities
+      view_label: 'Users (Purchaser)'
       from: legal_entities
       type: left_outer
       sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
@@ -185,12 +202,14 @@
       relationship: one_to_many
 
     - join: contractor_user
+      view_label: 'Users (Merchant)'
       from: users
       type: left_outer
       sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user.id}
       relationship: many_to_one
       
     - join: client_user
+      view_label: 'Users (Purchaser)'
       from: users
       type: left_outer
       sql_on: ${client_legal_entities.principal_id} = ${client_user.id}
@@ -199,15 +218,18 @@
 - explore: transaction_entries_base
   from: transaction_entries
   view: transaction_entries
+  view_label: ''
   extension: required
 #  access_filter_fields: [transaction_entries.marketplace_id]
   joins:
     - join: transaction_entries_relationship
+      view_label: ''
       from: transaction_entries
       relationship: one_to_one
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
       
     - join: transaction_pendings
+      view_label: ''
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
       relationship: one_to_many
       
@@ -217,22 +239,26 @@
       relationship: many_to_one
       
     - join: milestones
+      view_label: 'Items'
       type: left_outer 
       sql_on: ${accounts.milestone_id} = ${milestones.id}
       relationship: many_to_one
       
     - join: related_accounts
+      view_label: 'Accounts'
       from: accounts
       type: left_outer
       sql_on: ${transaction_entries_relationship.account_id} = ${related_accounts.id}
       relationship: many_to_one
       
     - join: related_marketplaces
+      view_label: 'Marketplaces'
       from: marketplaces
       sql_on: ${transaction_entries_relationship.marketplace_id} = ${related_marketplaces.id}
       relationship: one_to_one
       
     - join: legal_entities
+      view_label: 'Users'
       type: left_outer
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
@@ -250,6 +276,7 @@
   extension: required
   joins: 
     - join: legal_entities
+      view_label: 'Users'
       type: left_outer
       sql_on: ${legal_entities.uuid} = ${security_checks.external_id}
       relationship: many_to_many
@@ -275,6 +302,7 @@
       relationship: many_to_one
       
 - explore: accounts_base
+  view_label: ''
   extension: required
   joins:
 #     - join: users
@@ -283,29 +311,34 @@
 #       relationship: many_to_one
 
     - join: legal_entities
+      view_label: 'Users'
       type: left_outer 
       sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
       relationship: many_to_one
       
     - join: contractor_legal_entities
+      view_label: 'Users (Merchant)'
       from: legal_entities
       type: left_outer
       sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
 
     - join: client_legal_entities
+      view_label: 'Users (Purchaser)'
       from: legal_entities
       type: left_outer
       sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
       relationship: many_to_one 
       
     - join: client_user_auths
+      view_label: 'Users (Purchaser)'
       from: user_auths
       type: left_outer
       sql_on: ${client_legal_entities.principal_id} = ${client_user_auths.id}
       relationship: one_to_one
       
     - join: contractor_user_auths
+      view_label: 'Users (Merchant)'
       from: user_auths
       type: left_outer
       sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user_auths.id}
@@ -318,6 +351,7 @@
 #       relationship: one_to_many
       
     - join: milestones
+      view_label: 'Items'
       type: left_outer 
       sql_on: ${accounts.milestone_id} = ${milestones.id}
       relationship: many_to_one
@@ -348,11 +382,13 @@
       relationship: many_to_one
       
     - join: transaction_entries
+      view_label: ''
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
 
     - join: transaction_pendings
+      view_label: ''
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
       relationship: many_to_one

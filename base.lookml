@@ -104,7 +104,7 @@
 
     - join: currencies
       type: left_outer
-      sql_on: ${transaction_entries.currency_id} = ${currencies.id}
+      sql_on: ${accounts_from.currency_id} = ${currencies.id}
       relationship: one_to_one
 
     - join: milestones_to

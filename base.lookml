@@ -2,6 +2,7 @@
   extension: required
 
 - explore: legal_entities_base
+  access_filter_fields: [marketplaces.id]
   view_label: ''
   extension: required
   joins:
@@ -27,6 +28,7 @@
       relationship: many_to_one
 
 - explore: marketplaces_base
+  access_filter_fields: [marketplaces.id]
   view_label: ''
   extension: required
   joins:
@@ -64,6 +66,7 @@
       relationship: many_to_one
       
 - explore: users_base
+  access_filter_fields: [marketplaces.id]
   extension: required
   view_label: ''
   joins:
@@ -72,11 +75,24 @@
       type: left_outer
       sql_on: ${users.id} = ${legal_entities.principal_id}
       relationship: one_to_many
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${users.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
     
 - explore: agreements_base
+  access_filter_fields: [marketplaces.id]
   extension: required
+  joins:
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${agreements.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
   
 - explore: transaction_pendings_base
+  access_filter_fields: [marketplaces.id]
   extension: required
   view_label: ''
   joins:
@@ -134,8 +150,14 @@
       relationship: many_to_many
 
 - explore: monthly_fee_report_base
+  access_filter_fields: [marketplaces.id]
   extension: required
   joins:
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${monthly_fee_report.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
     - join: from_accounts
       from: accounts
       sql_on: ${monthly_fee_report.account_from_id} = ${from_accounts.id}
@@ -168,6 +190,7 @@
       
     
 - explore: milestones_base
+  access_filter_fields: [marketplaces.id]
   extension: required
   view_label: ''
   joins:
@@ -216,6 +239,7 @@
       relationship: many_to_one
 
 - explore: transaction_entries_base
+  access_filter_fields: [marketplaces.id]
   from: transaction_entries
   view: transaction_entries
   view_label: ''
@@ -273,6 +297,7 @@
       relationship: one_to_one
 
 - explore: security_checks_base
+  access_filter_fields: [marketplaces.id]
   extension: required
   joins: 
     - join: legal_entities
@@ -302,6 +327,7 @@
       relationship: many_to_one
       
 - explore: accounts_base
+  access_filter_fields: [marketplaces.id]
   view_label: ''
   extension: required
   joins:

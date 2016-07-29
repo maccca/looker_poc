@@ -5,7 +5,8 @@
       SELECT 
       te1.account_id as account_from_id,
       te2.account_id as account_to_id,
-      te2.amount as amount
+      te2.amount as amount,
+      te2.marketplace_id as marketplace_id
       FROM transaction_entries te1
       LEFT JOIN transaction_entries te2
       ON te1.related_transaction_id = te2.id
@@ -49,10 +50,15 @@
     type: number
     sql: ${TABLE}.amount
 
+  - dimension: marketplace_id
+    type: number
+    sql: ${TABLE}.marketplace_id
+    
   sets:
     detail:
       - account_from_id
       - account_to_id
       - currency_id
       - amount
+      - marketplace_id
 

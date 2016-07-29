@@ -223,7 +223,7 @@
 #  access_filter_fields: [transaction_entries.marketplace_id]
   joins:
     - join: transaction_entries_relationship
-      view_label: ''
+      view_label: 'Transaction Entries Relationship'
       from: transaction_entries
       relationship: one_to_one
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
@@ -245,14 +245,14 @@
       relationship: many_to_one
       
     - join: related_accounts
-      view_label: 'Accounts'
+      view_label: 'Related Accounts'
       from: accounts
       type: left_outer
       sql_on: ${transaction_entries_relationship.account_id} = ${related_accounts.id}
       relationship: many_to_one
       
     - join: related_marketplaces
-      view_label: 'Marketplaces'
+      view_label: 'Related Marketplaces'
       from: marketplaces
       sql_on: ${transaction_entries_relationship.marketplace_id} = ${related_marketplaces.id}
       relationship: one_to_one

@@ -8,7 +8,7 @@
     
   - dimension: days_in_month
     type: number
-    hidden: true
+    hidden: false
     sql: |
       DATE_PART('days', 
         DATE_TRUNC('month', NOW()) 
@@ -18,12 +18,12 @@
   
   - dimension: current_day_index
     type: number
-    hidden: true
+    hidden: false
     sql: ${created_day_of_month}
 
   - dimension: agreement_id
     type: number
-    # hidden: true
+    # hidden: false
     sql: ${TABLE}.agreement_id
 
   - dimension: buyer_email
@@ -96,7 +96,7 @@
 
   - dimension: marketplace_id
     type: number
-    # hidden: true
+    # hidden: false
     sql: ${TABLE}.marketplace_id
 
   - dimension: name
@@ -105,7 +105,7 @@
 
   - dimension: payment_type_id
     type: number
-    # hidden: true
+    # hidden: false
     sql: ${TABLE}.payment_type_id
 
   - dimension: previous_state_id
@@ -174,17 +174,17 @@
     
   - measure: percent_through_month
     type: number
-    hidden: true
+    hidden: false
     sql: ${max_current_day}/${max_days_in_month}
     
   - measure: max_current_day
     type: max
-    hidden: true
+    hidden: false
     sql: ${current_day_index}
     
   - measure: max_days_in_month
     type: max
-    hidden: true
+    hidden: false
     sql: ${days_in_month}
 
 #   - measure: latest_description

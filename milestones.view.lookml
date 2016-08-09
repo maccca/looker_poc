@@ -5,6 +5,21 @@
     primary_key: true
     type: number
     sql: ${TABLE}.id
+    
+  - dimension: days_in_month
+    type: number
+    hidden: true
+    sql: |
+      DATE_PART('days', 
+        DATE_TRUNC('month', NOW()) 
+        + '1 MONTH'::INTERVAL 
+        - '1 DAY'::INTERVAL
+      )
+  
+  - dimension: current_day_index
+    type: number
+    hidden: true
+    sql: ${created_day_of_month}
 
   - dimension: agreement_id
     type: number
@@ -42,7 +57,7 @@
 
   - dimension_group: created
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, day_of_month]
     sql: ${TABLE}.created_at
 
   - dimension: deposit_reference
@@ -156,6 +171,21 @@
   - measure: latest_created_date
     type: string
     sql: MAX(${created_date})
+    
+  - measure: percent_through_month
+    type: number
+    hidden: true
+    sql: ${max_current_day}/${max_days_in_month}
+    
+  - measure: max_current_day
+    type: max
+    hidden: true
+    sql: ${current_day_index}
+    
+  - measure: max_days_in_month
+    type: max
+    hidden: true
+    sql: ${days_in_month}
 
 #   - measure: latest_description
 #     value: ${description}

@@ -14,12 +14,16 @@
         DATE_TRUNC('month', NOW()) 
         + '1 MONTH'::INTERVAL 
         - '1 DAY'::INTERVAL
-      )
+      ) * 86400
   
   - dimension: current_day_index
     type: number
     hidden: false
-    sql: ${created_day_of_month}
+    sql: | 
+      (extract(days from NOW())*86400
+      + extract(hours from NOW())*3600 
+      + extract(minutes from NOW())*60 
+      + extract(seconds from NOW()) )
 
   - dimension: agreement_id
     type: number
@@ -161,7 +165,7 @@
 
   - measure: count
     type: count
-    drill_fields: detail*
+    drill_fields: summary_detail*
     
   - measure: total_cost
     type: sum
@@ -194,6 +198,11 @@
 
   # ----- Sets of fields for drilling ------
   sets:
+    summary_detail:
+    - id
+    - name
+    - cost
+  
     detail:
     - id
     - name

@@ -199,8 +199,10 @@
   # ----- Sets of fields for drilling ------
   sets:
     summary_detail:
+    - created_time
     - id
     - name
+    - description
     - cost
   
     detail:

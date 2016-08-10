@@ -111,12 +111,13 @@
 
   - measure: count
     type: count
-    drill_fields: detail*
+    drill_fields: summary_detail*
 
   - measure: total_amount
     type: sum
     sql: abs(${amount}*1.0 / 100)
     value_format_name: usd
+    drill_fields: summary_detail*
     
   - dimension: formatted_amount
     label: 'Amount'
@@ -137,6 +138,12 @@
 
   # ----- Sets of fields for drilling ------
   sets:
+    summary_detail:
+    - created_time
+    - id
+    - description
+    - amount
+    
     detail:
     - id
     - users.id

@@ -171,6 +171,7 @@
     type: sum
     sql: ${cost} / 100
     value_format: '$#,##0.00'
+    drill_fields: summary_detail*
 
   - measure: latest_created_date
     type: string

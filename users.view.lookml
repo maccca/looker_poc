@@ -174,11 +174,17 @@
 
   - measure: count
     type: count
-    drill_fields: detail*
+    drill_fields: summary_detail*
 
 
   # ----- Sets of fields for drilling ------
   sets:
+    summary_detail:
+    - created_time
+    - firstname
+    - lastname
+    - email
+    
     detail:
     - id
     - lastname

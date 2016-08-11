@@ -202,7 +202,6 @@
     summary_detail:
     - created_time
     - id
-    - name
     - description
     - cost
   

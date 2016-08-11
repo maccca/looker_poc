@@ -125,11 +125,13 @@
     type: number
     sql: abs(${TABLE}.amount*1.0 / 100)
     value_format_name: usd
+    drill_fields: summary_detail*
     
   - measure: escrow_total
     type: sum
     sql: ${amount}*1.0 / 100
     value_format_name: usd
+    drill_fields: summary_detail*
 
   - measure: total_amount_in_millions
     type: sum

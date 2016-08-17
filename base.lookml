@@ -423,3 +423,18 @@
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
       relationship: many_to_one
+      
+- explore: ironman_callbacks_base
+  access_filter_fields: [marketplaces.id]
+  extension: required
+  from: ironman_callbacks
+  joins: 
+    - join: ironman_callback_responses
+      view_label: 'Responses'
+      type: left_outer
+      sql_on: ${ironman_callbacks.id::text} = ${ironman_callback_responses.ironman_callback_id}
+      relationship: one_to_many
+    - join: marketplaces
+      type: left_outer 
+      sql_on: ${ironman_callbacks.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one

@@ -237,6 +237,11 @@
       type: left_outer
       sql_on: ${client_legal_entities.principal_id} = ${client_user.id}
       relationship: many_to_one
+    
+    - join: currencies
+      type: left_outer
+      sql_on: ${accounts.currency_id} = ${currencies.id}
+      relationship: many_to_one
 
 - explore: transaction_entries_base
   access_filter_fields: [marketplaces.id]

@@ -34,5 +34,5 @@
 - explore: goodguys_airtasker_disbursements
   extends: goodguys_airtasker_disbursements_base
 
-- explore: ironman_callbacks
-  extends: ironman_callbacks_base
+- explore: ironman_callback_responses
+  extends: ironman_callback_responses_base

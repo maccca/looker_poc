@@ -419,15 +419,15 @@
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
       relationship: many_to_one
       
-- explore: ironman_callbacks_base
+- explore: ironman_callback_responses_base
   access_filter_fields: [marketplaces.id]
   extension: required
-  from: ironman_callbacks
+  from: ironman_callback_responses
   joins: 
-    - join: ironman_callback_responses
-      view_label: 'Responses'
+    - join: ironman_callbacks
+      view_label: 'Callbacks'
       type: left_outer
-      sql_on: ${ironman_callbacks.id::text} = ${ironman_callback_responses.ironman_callback_id}
+      sql_on: ${ironman_callback_responses.ironman_callback_id} = ${ironman_callbacks.id}::text
       relationship: one_to_many
     - join: marketplaces
       type: left_outer 

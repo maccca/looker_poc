@@ -427,7 +427,7 @@
     - join: ironman_callback_responses
       view_label: 'Responses'
       type: left_outer
-      sql_on: ${ironman_callbacks.id} = ${ironman_callback_responses.ironman_callback_id}
+      sql_on: ${ironman_callbacks.id::text} = ${ironman_callback_responses.ironman_callback_id}
       relationship: one_to_many
     - join: marketplaces
       type: left_outer 

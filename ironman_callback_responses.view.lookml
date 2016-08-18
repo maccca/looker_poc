@@ -18,11 +18,11 @@
 
   - dimension: payload
     type: string
-    sql: ${TABLE}.payload
+    sql: ${TABLE}.payload::text
 
   - dimension: response
     type: string
-    sql: ${TABLE}.response
+    sql: ${TABLE}.response::text
 
   - dimension: response_code
     type: number

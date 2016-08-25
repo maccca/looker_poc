@@ -55,5 +55,4 @@
 
   - dimension: EBT_ACCT_TYPE
     type: string
-    sql: JSON_EXTRACT_PATH(CAST(${TABLE}.redbody AS JSON), 'EBT_ACCT_TYPE')
-#     sql: json_object_keys(${TABLE}.redbody::json->> 'EBT_ACCT_TYPE')
+    sql: ${TABLE}.redbody::json ->> 'EBT_ACCT_TYPE'

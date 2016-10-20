@@ -443,3 +443,18 @@
       type: left_outer 
       sql_on: ${ironman_callbacks.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+
+- explore: transaction_check_responses_base
+  access_filter_fields: [marketplaces.id]
+  extension: required
+  from:  transaction_check_responses
+  joins: 
+    - join: transaction_checks
+      view_label: 'TransactionChecks'
+      type: left_outer
+      sql_on: ${transaction_check_responses.transaction_check_id} = ${transaction_checks.id}
+      relationship: one_to_many
+    - join: marketplaces
+      type: left_outer 
+      sql_on: ${transaction_checks.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one

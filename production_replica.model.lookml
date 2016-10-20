@@ -39,3 +39,6 @@
 
 - explore: ironman_callback_responses
   extends: ironman_callback_responses_base
+
+- explore: transaction_check_responses
+  extends: transaction_check_responses_base

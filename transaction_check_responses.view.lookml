@@ -53,3 +53,6 @@
     type: count
     drill_fields: [id, transaction_checks.id]
 
+  - dimension: EBT_ACCT_TYPE
+    type: string
+    sql: ${TABLE}.redbody::json ->> 'EBT_ACCT_TYPE'

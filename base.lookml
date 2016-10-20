@@ -65,6 +65,11 @@
       sql_on: ${accounts.id} = ${transaction_entries.account_id}
       relationship: many_to_one
       
+    - join: fee_lists
+      type: left_outer
+      sql_on: ${marketplaces.id} = ${fee_lists.marketplace_id}
+      relationship: many_to_one  
+      
 - explore: users_base
   access_filter_fields: [marketplaces.id]
   extension: required

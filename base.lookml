@@ -153,7 +153,7 @@
       type: left_outer
       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
       relationship: many_to_many
-
+      
 - explore: monthly_fee_report_base
   access_filter_fields: [marketplaces.id]
   extension: required
@@ -427,6 +427,12 @@
       view_label: ''
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
+      relationship: many_to_one
+    
+    - join: transaction_references
+      view_label: ''
+      type: left_outer
+      sql_on: ${accounts.id} = ${transaction_references.account_id}
       relationship: many_to_one
       
 - explore: ironman_callback_responses_base

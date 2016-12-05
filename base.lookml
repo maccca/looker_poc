@@ -430,7 +430,7 @@
       relationship: many_to_one
     
     - join: transaction_references
-      view_label: ''
+      view_label: 'TransactionReferences'
       type: left_outer
       sql_on: ${accounts.id} = ${transaction_references.account_id}
       relationship: many_to_one

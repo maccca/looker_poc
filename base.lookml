@@ -102,12 +102,14 @@
   view_label: ''
   joins:
     - join: accounts_from
+      view_label: 'Accounts From'
       from: accounts
       type: inner
       sql_on: ${transaction_pendings.account_from_id} = ${accounts_from.id}
       relationship: many_to_one
       
     - join: accounts_to
+      view_label: 'Accounts To'
       from: accounts
       type: inner
       sql_on: ${transaction_pendings.account_to_id} = ${accounts_to.id}
@@ -120,7 +122,7 @@
       sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id} 
  
     - join: transaction_entries_relationship
-      view_label: ''
+      view_label: 'Transaction Entries Related'
       from: transaction_entries
       relationship: many_to_many
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
@@ -132,23 +134,25 @@
       relationship: many_to_one
     
     - join: marketplaces
+      view_label: 'Marketplaces'
       sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
       relationship: one_to_one
 
     - join: currencies
+      view_label: 'Currencies'
       type: left_outer
       sql_on: ${accounts_from.currency_id} = ${currencies.id}
       relationship: one_to_one
 
     - join: milestones_to
-      view_label: 'Items'
+      view_label: 'Items To'
       from: milestones
       type: left_outer
       sql_on: ${accounts_to.milestone_id} = ${milestones_to.id}
       relationship: many_to_many
 
     - join: milestones_from
-      view_label: 'Items'
+      view_label: 'Items From'
       from: milestones
       type: left_outer
       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}

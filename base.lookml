@@ -155,14 +155,14 @@
       relationship: many_to_many
       
     - join: transaction_references_to
-      view_label: ''
+      view_label: 'TransactionReferencesTo'
       from: transaction_references
       type: left_outer
       sql_on: ${accounts_to.id} = ${transaction_references_to.account_id}
       relationship: many_to_one
       
     - join: transaction_references_from
-      view_label: ''
+      view_label: 'TransactionReferencesFrom'
       from: transaction_references
       type: left_outer
       sql_on: ${accounts_from.id} = ${transaction_references_from.account_id}

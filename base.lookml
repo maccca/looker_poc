@@ -154,6 +154,20 @@
       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
       relationship: many_to_many
       
+    - join: transaction_references_to
+      view_label: ''
+      from: transaction_references
+      type: left_outer
+      sql_on: ${accounts_to.id} = ${transaction_references_to.account_id}
+      relationship: many_to_one
+      
+    - join: transaction_references_from
+      view_label: ''
+      from: transaction_references
+      type: left_outer
+      sql_on: ${accounts_from.id} = ${transaction_references_from.account_id}
+      relationship: many_to_one
+      
 - explore: monthly_fee_report_base
   access_filter_fields: [marketplaces.id]
   extension: required

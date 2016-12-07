@@ -114,7 +114,7 @@
       relationship: many_to_one
       
     - join: transaction_entries
-      view_label: ''
+      view_label: 'Transaction Entries'
       type: left_outer
       relationship: many_to_many
       sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id} 
@@ -155,14 +155,14 @@
       relationship: many_to_many
       
     - join: transaction_references_to
-      view_label: 'TransactionReferencesTo'
+      view_label: 'Transaction References To'
       from: transaction_references
       type: left_outer
       sql_on: ${accounts_to.id} = ${transaction_references_to.account_id}
       relationship: many_to_one
       
     - join: transaction_references_from
-      view_label: 'TransactionReferencesFrom'
+      view_label: 'Transaction References From'
       from: transaction_references
       type: left_outer
       sql_on: ${accounts_from.id} = ${transaction_references_from.account_id}

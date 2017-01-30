@@ -3,6 +3,7 @@
   derived_table:
     sql: |
       SELECT
+      ms.marketplace_id as "Marketplace ID",
       ms.name as "Item Name",
       ms.external_id as "Item ID", 
       stm.name as "Item Status",
@@ -40,9 +41,12 @@
       LEFT OUTER JOIN transaction_pendings tp ON te.transaction_pending_id = tp.id
       LEFT OUTER JOIN transaction_batches tb ON tp.transaction_batch_id = tb.id
       LEFT OUTER JOIN transaction_references tr ON tr.account_id = ac.id
-      WHERE te.marketplace_id = '571'
+      WHERE {% condition marketplace_filter %} marketplaces.name {% endcondition %}
 
   fields:
+  - filter: marketplace_filter
+    type: string
+
   - measure: count
     type: count
     drill_fields: detail*
@@ -152,6 +156,11 @@
     label: "Seller ID"
     sql: ${TABLE}."Seller ID"
 
+  - dimension: marketplace_id
+    type: string
+    label: "Marketplace ID"
+    sql: ${TABLE}."Marketplace ID"
+    
   sets:
     detail:
       - item_name
@@ -175,4 +184,5 @@
       - seller_name
       - seller_email
       - seller_id
+      - marketplace_id
 

@@ -42,3 +42,6 @@
 
 - explore: transaction_check_responses
   extends: transaction_check_responses_base
+
+- explore: taigan_report
+  extends: taigan_report_base

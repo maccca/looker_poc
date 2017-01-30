@@ -482,3 +482,14 @@
       type: left_outer 
       sql_on: ${transaction_checks.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+
+- explore: taigan_report_base
+  access_filter_fields: [marketplaces.id]
+  extension: required
+  from: taigan_report
+  joins:
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${taigan_report.marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one

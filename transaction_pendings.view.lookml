@@ -2,7 +2,6 @@
   fields:
 
   - dimension: bundle_transaction_pending_id
-    primary_key: true
     type: number
     sql: ${TABLE}.bundle_transaction_pending_id
 
@@ -28,6 +27,7 @@
     sql: ${TABLE}.currency_id
 
   - dimension: id
+    primary_key: true
     type: number
     sql: ${TABLE}.id
 

@@ -162,7 +162,7 @@
       view_label: 'Transaction References'
       from: transaction_references
       type: left_outer
-      sql_on: ${transaction_references.id} = ${transaction_references.transaction_pending_id}
+      sql_on: ${transaction_pendings.id} = ${transaction_references.transaction_pending_id}
       relationship: many_to_one
       
     - join: transaction_references_to

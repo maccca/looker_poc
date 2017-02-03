@@ -135,7 +135,7 @@
     
     - join: marketplaces
       view_label: 'Marketplaces'
-      sql_on: ${legal_entities.id} = ${marketplaces.legal_entity_id}
+      sql_on: ${transaction_pendings.marketplace_id} = ${marketplaces.id}
       relationship: one_to_one
 
     - join: currencies

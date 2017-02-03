@@ -157,6 +157,13 @@
       type: left_outer
       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
       relationship: many_to_many
+    
+    - join: transaction_references
+      view_label: 'Transaction References'
+      from: transaction_references
+      type: left_outer
+      sql_on: ${transaction_references.id} = ${transaction_references.transaction_pending_id}
+      relationship: many_to_one
       
     - join: transaction_references_to
       view_label: 'Transaction References To'

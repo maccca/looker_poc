@@ -80,11 +80,19 @@
       type: left_outer
       sql_on: ${users.id} = ${legal_entities.principal_id}
       relationship: one_to_many
+      
     - join: marketplaces
       view_label: 'Marketplaces'
       type: left_outer
       sql_on: ${users.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+      
+    - join: user_auths
+      view_label: 'User Auths'
+      from: user_auths
+      type: left_outer
+      sql_on: ${users.id} = ${user_auths.user_id}
+      relationship: one_to_one
     
 - explore: agreements_base
   access_filter_fields: [marketplaces.id]
@@ -399,17 +407,17 @@
       relationship: many_to_one 
       
     - join: client_user_auths
-      view_label: 'Users (Purchaser)'
+      view_label: 'User Auths (Purchaser)'
       from: user_auths
       type: left_outer
-      sql_on: ${client_legal_entities.principal_id} = ${client_user_auths.id}
+      sql_on: ${client_legal_entities.principal_id} = ${client_user_auths.user_id}
       relationship: one_to_one
       
     - join: contractor_user_auths
-      view_label: 'Users (Merchant)'
+      view_label: 'User Auths (Merchant)'
       from: user_auths
       type: left_outer
-      sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user_auths.id}
+      sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user_auths.user_id}
       relationship: one_to_one
    
 #    - join: to_account_milestones

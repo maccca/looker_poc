@@ -250,6 +250,13 @@
       type: left_outer
       sql_on: ${contractor_legal_entities.id} = ${accounts.legal_entity_id}
       relationship: one_to_many
+      
+    - join: milestone_account
+      view_label: 'Milestone Account'
+      from: accounts
+      type: left_outer
+      sql_on: ${milestones.id} = ${milestone_account.milestone_id}
+      relationship: one_to_one
 
     - join: milestones_balance
       type: inner
@@ -282,6 +289,13 @@
       type: left_outer
       sql_on: ${client_legal_entities.principal_id} = ${client_user.id}
       relationship: many_to_one
+      
+    - join: transaction_references
+      view_label: 'References'
+      from: transaction_references
+      type: left_outer
+      sql_on: ${milestone_account.id} = ${transaction_references.account_id}
+      relationship: one_to_one  
     
     - join: currencies
       type: left_outer

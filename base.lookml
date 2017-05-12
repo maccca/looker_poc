@@ -120,6 +120,13 @@
       type: left_outer
       relationship: many_to_many
       sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id} 
+      
+    - join: transaction_pendings_relationship
+      view_label: 'Bundle Transaction Pendings'
+      from: transaction_pendings
+      type: left_outer
+      relationship: many_to_many
+      sql_on: ${transaction_pendings.bundle_transaction_pending_id} = ${transaction_pendings.id} 
  
     - join: transaction_entries_relationship
       view_label: 'Transaction Entries Related'

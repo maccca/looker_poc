@@ -17,6 +17,7 @@
     sql: ${TABLE}.created_at
 
   - dimension: reference
+    label: 'OPS Centre'
     type: string
     sql: ${TABLE}.reference
 

@@ -167,6 +167,13 @@
     type: count
     drill_fields: summary_detail*
     
+  - dimension: bpay_crn
+    label: 'BPAY CRN'
+    type: string
+    sql: CASE WHEN ${marketplace_id} = '120' THEN ${id} + 10001401200000
+               ELSE ${id} + 914012000
+         END     
+    
   - measure: total_cost
     type: sum
     sql: ${cost} / 100

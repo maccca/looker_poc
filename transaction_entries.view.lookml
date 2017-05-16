@@ -34,6 +34,11 @@
     sql: |
       (EXTRACT(MONTH FROM ${created_raw}) = EXTRACT(MONTH FROM CURRENT_TIMESTAMP) AND
        EXTRACT(YEAR FROM ${created_raw}) = EXTRACT(YEAR FROM CURRENT_TIMESTAMP))
+       
+  - dimension: is_before_mtd
+    type: yesno
+    sql: |
+      (EXTRACT(DAY FROM ${created_raw}) < EXTRACT(DAY FROM CURRENT_TIMESTAMP))     
 
   - dimension: currency_id
     type: number

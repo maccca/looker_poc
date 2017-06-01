@@ -143,9 +143,15 @@
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
       
     - join: legal_entities
-      view_label: 'Users'
+      view_label: 'Legal Entities'
       type: left_outer
       sql_on: ${accounts_from.legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+      
+    - join: users
+      view_label: 'Users'
+      type: left_outer
+      sql_on: ${users.id} = ${legal_entities.principal_id}
       relationship: many_to_one
     
     - join: marketplaces

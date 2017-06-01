@@ -56,6 +56,10 @@
     type: number
     sql: ${TABLE}.transaction_batch_id
 
+  - dimension: reference_milestone_id
+    type: number
+    sql: ${TABLE}.reference_milestone_id
+    
   - dimension: transaction_type
     type: number
     sql: ${TABLE}.transaction_type

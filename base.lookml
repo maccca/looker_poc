@@ -336,6 +336,11 @@
   extension: required
 #  access_filter_fields: [transaction_entries.marketplace_id]
   joins:
+    - join: account_types
+      type: left_outer 
+      sql_on: ${accounts.account_type_id} = ${account_types.id}
+      relationship: many_to_one
+  
     - join: transaction_entries_relationship
       view_label: 'Transaction Entries Relationship'
       from: transaction_entries

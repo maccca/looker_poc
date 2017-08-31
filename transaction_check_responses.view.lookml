@@ -56,3 +56,17 @@
   - dimension: EBT_ACCT_TYPE
     type: string
     sql: ${TABLE}.redbody::json ->> 'EBT_ACCT_TYPE'
+
+  - dimension: AMT
+    type: number
+    sql: cast(${TABLE}.redbody::json ->> 'AMT' AS integer)/100
+    value_format_name: usd
+    
+  - measure: total_amt
+    type: sum
+    sql: ${AMT}
+    value_format_name: usd
+
+  - dimension: CURR_CD
+    type: string
+    sql: ${TABLE}.redbody::json ->> 'CURR_CD'

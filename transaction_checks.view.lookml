@@ -72,10 +72,33 @@
     # hidden: true
     sql: ${TABLE}.user_id
 
+  - dimension: transaction_checkable_id
+    type: number
+    # hidden: true
+    sql: ${TABLE}.transaction_checkable_id
+    
+  - dimension: transaction_checkable_type
+    type: string
+    # hidden: true
+    sql: ${TABLE}.transaction_checkable_type
+
   - measure: count
     type: count
     drill_fields: detail*
 
+  - dimension: amt
+    type: number
+    sql: cast(substring(${TABLE}.data, 'AMT:\s+(\d+)\s+') as integer) /100
+    value_format_name: usd
+
+  - measure: total_amt
+    type: sum
+    sql: ${amt}
+    value_format_name: usd
+
+  - dimension: curr_cd
+    type: string
+    sql: substring(${TABLE}.data, 'CURR_CD:\s+(\w+)\s+')
 
   # ----- Sets of fields for drilling ------
   sets:

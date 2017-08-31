@@ -549,6 +549,27 @@
       type: left_outer 
       sql_on: ${transaction_checks.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+    - join: milestones
+      view_label: 'Items'
+      #type: left_outer 
+      sql_on: ${transaction_checks.transaction_checkable_id} = ${milestones.id}
+      relationship: one_to_one
+  
+    - join: accounts
+      type: left_outer
+      sql_on: ${milestones.id} = ${accounts.milestone_id}
+      relationship: one_to_many
+      
+    - join: transaction_entries
+      type: left_outer
+      sql_on: ${accounts.id} = ${transaction_entries.account_id}
+      relationship: many_to_one
+    - join: currencies
+      type: left_outer
+      sql_on: ${accounts.currency_id} = ${currencies.id}
+      relationship: many_to_one
+      
+
 
 - explore: taigan_report_base
   access_filter_fields: [marketplaces.id]

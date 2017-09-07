@@ -391,6 +391,67 @@
       sql_on: ${transaction_entries.currency_id} = ${currencies.id}
       relationship: one_to_one
 
+- explore: public_transaction_entries_base
+  from: transaction_entries
+  view: transaction_entries
+  view_label: ''
+  extension: required
+  joins:
+    - join: account_types
+      type: left_outer 
+      sql_on: ${accounts.account_type_id} = ${account_types.id}
+      relationship: many_to_one
+  
+    - join: transaction_entries_relationship
+      view_label: 'Transaction Entries Relationship'
+      from: transaction_entries
+      relationship: one_to_one
+      sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}
+      
+    - join: transaction_pendings
+      view_label: ''
+      sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
+      relationship: one_to_many
+      
+    - join: accounts
+      type: left_outer
+      sql_on: ${transaction_entries.account_id} = ${accounts.id}
+      relationship: many_to_one
+      
+    - join: milestones
+      view_label: 'Items'
+      type: left_outer 
+      sql_on: ${accounts.milestone_id} = ${milestones.id}
+      relationship: many_to_one
+      
+    - join: related_accounts
+      view_label: 'Related Accounts'
+      from: accounts
+      type: left_outer
+      sql_on: ${transaction_entries_relationship.account_id} = ${related_accounts.id}
+      relationship: many_to_one
+      
+    - join: related_marketplaces
+      view_label: 'Related Marketplaces'
+      from: marketplaces
+      sql_on: ${transaction_entries_relationship.marketplace_id} = ${related_marketplaces.id}
+      relationship: one_to_one
+      
+    - join: legal_entities
+      view_label: 'Users'
+      type: left_outer
+      sql_on: ${accounts.legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+    
+    - join: marketplaces
+      sql_on: ${transaction_entries.marketplace_id} = ${marketplaces.id}
+      relationship: one_to_one
+
+    - join: currencies
+      type: left_outer
+      sql_on: ${transaction_entries.currency_id} = ${currencies.id}
+      relationship: one_to_one
+
 - explore: security_checks_base
   access_filter_fields: [marketplaces.id]
   extension: required

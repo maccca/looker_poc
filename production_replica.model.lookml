@@ -7,6 +7,9 @@
 - explore: transaction_entries
   extends: transaction_entries_base
   
+- explore: public_transaction_entries
+  extends: public_transaction_entries_base
+  
 - explore: milestones
   extends: milestones_base
   

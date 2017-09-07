@@ -342,7 +342,7 @@
       relationship: many_to_one
   
     - join: transaction_entries_relationship
-      view_label: 'Transaction Entries Relationship'
+      view_label: ''
       from: transaction_entries
       relationship: one_to_one
       sql_on: ${transaction_entries.id} = ${transaction_entries_relationship.related_transaction_id}

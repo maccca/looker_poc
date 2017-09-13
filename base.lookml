@@ -642,3 +642,14 @@
       type: left_outer
       sql_on: ${taigan_report.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+
+- explore: feature_configurations_base
+  access_filter_fields: [marketplaces.id]
+  view_label: ''
+  extension: required
+  joins:
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one

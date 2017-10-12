@@ -49,5 +49,8 @@
 - explore: taigan_report
   extends: taigan_report_base
 
-- explore:  feature_configurations
+- explore: feature_configurations
   extends: feature_configurations_base
+
+- explore: countries
+  extends: countries_currencies_base

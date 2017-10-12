@@ -13,7 +13,14 @@
 
   - dimension: config
     type: string
+    hidden: true
     sql: ${TABLE}.config
+    
+  - dimension: config_text
+    type: string
+    #sql: ${TABLE}.config::json
+    sql: cast((${TABLE}.config)::json as string)
+    #sql: json_object_keys((${TABLE}.request->> 'notes')::json)
 
   - dimension: country_id
     type: number

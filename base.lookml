@@ -650,6 +650,16 @@
   joins:
     - join: marketplaces
       view_label: 'Marketplaces'
-      type: left_outer
+      type: full_outer
       sql_on: ${marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
+
+- explore: countries_currencies_base
+  view_label: ''
+  extension: required
+  joins:
+    - join: currencies
+      view_label: 'Currency'
+      type: left_outer
+      sql_on: ${currency_id} = ${currencies.id}
       relationship: many_to_one

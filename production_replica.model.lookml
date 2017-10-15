@@ -54,3 +54,6 @@
 
 - explore: countries
   extends: countries_currencies_base
+  
+- explore: payment_restrictions
+  extends: payment_restrictions_base

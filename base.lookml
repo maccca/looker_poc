@@ -663,3 +663,33 @@
       type: left_outer
       sql_on: ${currency_id} = ${currencies.id}
       relationship: many_to_one
+
+- explore: payment_restrictions_base
+  view_label: ''
+  extension: required
+  joins:
+    - join: marketplaces
+      view_label: 'Marketplaces'
+      type: left_outer
+      sql_on: ${marketplace_id} = ${marketplaces.id}
+      relationship: many_to_one
+    - join: countries
+      view_label: 'Countries'
+      type: left_outer
+      sql_on: ${country_id} = ${countries.id}
+      relationship: many_to_one
+    - join: legal_entities
+      view_label: 'Legal Entities'
+      type: left_outer
+      sql_on: ${legal_entity_id} = ${legal_entities.id}
+      relationship: many_to_one
+    - join: users
+      view_label: 'Users'
+      type: left_outer
+      sql_on: ${legal_entities.principal_id} = ${users.id}
+      relationship: many_to_one
+    - join: milestones
+      view_label: 'Milestones'
+      type: left_outer
+      sql_on: ${milestone_id} = ${milestones.id}
+      relationship: many_to_one

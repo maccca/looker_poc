@@ -27,6 +27,18 @@
       sql_on: ${accounts.legal_entity_id} = ${milestones.contractor_legal_entity_id}
       relationship: many_to_one
 
+    - join: countries
+      view_label: 'Countries'
+      type: left_outer 
+      sql_on: ${legal_entities.country_id} = ${countries.id}
+      relationship: many_to_one
+
+    - join: currencies
+      view_label: 'Currency'
+      type: left_outer
+      sql_on: ${legal_entities.currency_id} = ${currencies.id}
+      relationship: many_to_one
+
 - explore: marketplaces_base
   access_filter_fields: [marketplaces.id]
   view_label: ''

@@ -705,3 +705,15 @@
       type: left_outer
       sql_on: ${milestone_id} = ${milestones.id}
       relationship: many_to_one
+      
+- explore: qas_transaction_entries_base
+  extends: transaction_entries_base
+  view_label: 'QAS - Transaction Entries with Currencies'
+  extension: required
+  joins:
+    - join: currencies
+      view_label: 'Currency'
+      type: left_outer
+      sql_on: ${currency_id} = ${currencies.id}
+      relationship: many_to_one
+

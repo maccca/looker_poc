@@ -52,6 +52,14 @@
     type: string
     sql: ${TABLE}.external_reference
 
+  - dimension: object_id
+    type: string
+    sql: ${TABLE}.object_id
+    
+  - dimension: object_type
+    type: string
+    sql: ${TABLE}.object_type
+
   - dimension: fee_id
     type: number
     # hidden: true

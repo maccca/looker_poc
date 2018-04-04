@@ -190,12 +190,29 @@
       sql_on: ${accounts_to.milestone_id} = ${milestones_to.id}
       relationship: many_to_many
 
+#     - join: milestones_from
+#       view_label: 'Items From'
+#       from: milestones
+#       type: left_outer
+#       sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
+#       relationship: many_to_many
+    
+    - join: milestone_account
+      view_label: 'Items Account'
+      from: accounts
+      type: left_outer
+      sql_on: ${transaction_entries.account_id} = ${milestone_account.id}
+      relationship: many_to_many
+    
     - join: milestones_from
       view_label: 'Items From'
       from: milestones
       type: left_outer
-      sql_on: ${accounts_from.milestone_id} = ${milestones_from.id}
+      sql_on: ${milestone_account.milestone_id} = ${milestones_from.id}
       relationship: many_to_many
+
+# LEFT JOIN accounts AS milestone_account ON transaction_entries.account_id = milestone_account.id
+# LEFT JOIN milestones AS milestones_from ON milestone_account.milestone_id = milestones_from.id
     
     - join: milestones_reference
       view_label: 'Reference Item'

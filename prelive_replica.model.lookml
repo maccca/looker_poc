@@ -3,6 +3,7 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 - include: "base.lookml"
+- persist_for: "5 minutes"
 
 - explore: transaction_entries
   extends: transaction_entries_base

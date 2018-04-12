@@ -51,6 +51,20 @@
   - dimension: state
     type: number
     sql: ${TABLE}.state
+    
+  - dimension: state_name
+    label: 'Status'
+    type: string
+    sql: CASE 
+          WHEN ${state} = 12000 THEN 'Successful'
+          WHEN ${state} = 12010 THEN 'Pending Successful'
+          WHEN ${state} = 12200 THEN 'Batched'
+          WHEN ${state} = 12360 THEN 'Invalid Account Details'
+          WHEN ${state} = 12370 THEN 'Failed Direct Debit'
+          WHEN ${state} = 12700 THEN 'Processing with Bank'
+          WHEN ${state} = 12900 THEN 'Errored'
+          ELSE 'No Status'
+        END
 
   - dimension: transaction_batch_id
     type: number

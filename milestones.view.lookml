@@ -143,7 +143,15 @@
   - dimension: state
     type: number
     sql: ${TABLE}.state
-
+    
+  - dimension: state_name
+    label: 'Status'
+    type: string
+    sql: CASE WHEN ${state} = 22000 THEN 'Pending'
+              WHEN ${state} = 22100 THEN 'Payment Requested'
+              ELSE 'Missing'
+         END
+           
   - dimension: tax_invoice
     type: yesno
     sql: ${TABLE}.tax_invoice

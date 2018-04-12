@@ -56,7 +56,18 @@
   - dimension: kyc_state
     type: number
     sql: ${TABLE}.kyc_state
-
+    
+  - dimension: kyc_state_name
+    type: string
+    label: 'Status'
+    sql: CASE 
+            WHEN ${kyc_state} = 23000 THEN 'Pending'
+            WHEN ${kyc_state} = 23100 THEN 'Pending KYC Check'
+            WHEN ${kyc_state} = 23150 THEN 'Pending U/W Check'
+            WHEN ${kyc_state} = 23200 THEN 'Approved'
+            ELSE 'No Status'
+          END
+          
   - dimension: name
     type: string
     sql: ${TABLE}.name

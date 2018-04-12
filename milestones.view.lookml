@@ -147,10 +147,32 @@
   - dimension: state_name
     label: 'Status'
     type: string
-    sql: CASE WHEN ${state} = 22000 THEN 'Pending'
-              WHEN ${state} = 22100 THEN 'Payment Requested'
-              ELSE 'Missing'
-         END
+    sql: CASE 
+          WHEN ${state} = 22000 THEN 'Pending'
+          WHEN ${state} = 22100 THEN 'Payment Requested'
+          WHEN ${state} = 22110 THEN 'Wire/BPAY Transfer Pending'
+          WHEN ${state} = 22111 THEN 'PayPal Pending'
+          WHEN ${state} = 22150 THEN 'Direct Debit Transfer Pending'
+          WHEN ${state} = 22175 THEN 'Credit Card Payment Held'
+          WHEN ${state} = 22180 THEN 'Payment Authorized'
+          WHEN ${state} = 22190 THEN 'Payment Denied'
+          WHEN ${state} = 22195 THEN 'Payment Voided'
+          WHEN ${state} = 22200 THEN 'Payment Deposited'
+          WHEN ${state} = 22300 THEN 'Release Requested'
+          WHEN ${state} = 22400 THEN 'Dispute Raised'
+          WHEN ${state} = 22410 THEN 'Dispute Resolution Requested'
+          WHEN ${state} = 22420 THEN 'Dispute Escalated'
+          WHEN ${state} = 22500 THEN 'Payment Released'
+          WHEN ${state} = 22575 THEN 'Cancelled'
+          WHEN ${state} = 22600 THEN 'Refunded'
+          WHEN ${state} = 22610 THEN 'Refund Pending'
+          WHEN ${state} = 22650 THEN 'Refund Flagged'
+          WHEN ${state} = 22670 THEN 'Off Platform Refunded'
+          WHEN ${state} = 22700 THEN 'Partial Release Requested'
+          WHEN ${state} = 22800 THEN 'Partial Payment Released'
+          WHEN ${state} = 22680 THEN 'Chargeback'
+          ELSE 'No Status'
+        END
            
   - dimension: tax_invoice
     type: yesno

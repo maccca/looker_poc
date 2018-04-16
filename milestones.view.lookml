@@ -111,6 +111,11 @@
     type: number
     # hidden: false
     sql: ${TABLE}.payment_type_id
+    
+  - dimension: invoice_url
+    type: string
+    # hidden: false
+    sql: ${TABLE}.invoice_url
 
   - dimension: previous_state_id
     type: number

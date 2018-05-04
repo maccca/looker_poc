@@ -352,6 +352,7 @@
       sql_on: ${milestone_account.id} = ${transaction_references.account_id}
       relationship: one_to_one  
       
+      
     - join: item_transactions
       view_label: 'Transaction Entries'
       from: transaction_entries

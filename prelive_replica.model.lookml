@@ -51,4 +51,3 @@
 
 - explore: payment_restrictions
   extends: payment_restrictions_base
-

@@ -351,6 +351,27 @@
       type: left_outer
       sql_on: ${milestone_account.id} = ${transaction_references.account_id}
       relationship: one_to_one  
+      
+    - join: item_transactions
+      view_label: 'Transaction Entries'
+      from: transaction_entries
+      type: left_outer
+      sql_on: ${milestone_account.id} = ${item_transactions.account_id}
+      relationship: one_to_many
+      
+    - join: item_related_transactions
+      view_label: 'Transaction Entries'
+      from: transaction_entries
+      type: left_outer
+      sql_on: ${item_related_transactions.id} = ${item_transactions.related_transaction_id} AND ${item_related_transactions.amount} < 0 
+      relationship: one_to_many  
+      
+    - join: payment_account
+      view_label: 'Payment Account'
+      from: accounts
+      type: inner
+      sql_on: ${payment_account.id} = ${item_related_transactions.account_id}
+      relationship: one_to_one
     
     - join: currencies
       type: left_outer
@@ -379,6 +400,12 @@
     - join: transaction_pendings
       view_label: ''
       sql_on: ${accounts.id} = ${transaction_pendings.account_to_id}
+      relationship: one_to_many
+      
+    - join: payouts
+      from: transaction_pendings
+      view_label: 'Batch Transactions'
+      sql_on: ${transaction_entries.transaction_pending_id} = ${transaction_pendings.id}
       relationship: one_to_many
       
     - join: accounts

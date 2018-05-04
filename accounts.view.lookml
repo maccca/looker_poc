@@ -8,9 +8,24 @@
 
   - dimension: account_type_id
     type: number
-    # hidden: true
     sql: ${TABLE}.account_type_id
-
+        
+  - dimension: account_type
+    type: string
+    sql: CASE 
+          WHEN ${TABLE}.account_type_id = 1000 THEN 'Assembly Payments Account'
+          WHEN ${TABLE}.account_type_id = 1100 THEN 'Wire Transfer'
+          WHEN ${TABLE}.account_type_id = 1200 THEN 'BPay'
+          WHEN ${TABLE}.account_type_id = 2000 THEN 'Digital Wallet'
+          WHEN ${TABLE}.account_type_id = 3000 THEN 'Item Account'
+          WHEN ${TABLE}.account_type_id = 9100 THEN 'Bank Account'
+          WHEN ${TABLE}.account_type_id = 9110 THEN 'Bank Account (International)'
+          WHEN ${TABLE}.account_type_id = 9200 THEN 'Credit Card'
+          WHEN ${TABLE}.account_type_id = 9300 THEN 'PayPal Payout'
+          WHEN ${TABLE}.account_type_id = 9400 THEN 'PayPal PayIn'
+          ELSE 'Null'
+        END
+        
   - dimension: active
     type: yesno
     sql: ${TABLE}.active = 'true'

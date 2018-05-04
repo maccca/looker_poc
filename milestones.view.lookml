@@ -15,7 +15,7 @@
         + '1 MONTH'::INTERVAL 
         - '1 DAY'::INTERVAL
       ) * 86400
-  
+      
   - dimension: current_day_index
     type: number
     hidden: false

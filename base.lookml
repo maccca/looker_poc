@@ -2,6 +2,8 @@
   extension: required
 
 
+
+
 - explore: legal_entities_base
   access_filter_fields: [marketplaces.id]
   view_label: ''

@@ -4,8 +4,6 @@
 - include: "*.dashboard.lookml"  # include all the dashboards
 - include: "base.lookml"
 
-
-
 - explore: transaction_entries
   extends: transaction_entries_base
   

@@ -32,7 +32,7 @@
 
   - dimension: amount
     type: number
-    sql: ${TABLE}.amount / 100
+    sql: ${TABLE}.amount / 100.00
     value_format_name: usd
 
   - dimension: bank_account_details

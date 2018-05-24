@@ -205,7 +205,7 @@
   - dimension: bpay_crn
     label: 'BPAY CRN'
     type: string
-    sql: CASE WHEN (${marketplace_id} = '120' THEN ${id} + 10001401200000)::text
+    sql: CASE WHEN ${marketplace_id} = '120' THEN (${id} + 10001401200000)::text
                ELSE (${id} + 914012000)::text
          END     
     

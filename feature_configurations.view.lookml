@@ -19,7 +19,7 @@
   - dimension: config_text
     type: string
     #sql: ${TABLE}.config::json
-    sql: cast((${TABLE}.config)::json as string)
+    sql: (${TABLE}.config)::text
     #sql: json_object_keys((${TABLE}.request->> 'notes')::json)
 
   - dimension: country_id

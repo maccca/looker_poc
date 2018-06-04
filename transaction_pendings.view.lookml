@@ -92,6 +92,10 @@
     type: string
     sql: ${TABLE}.uuid
     
+  - dimension: descriptor
+    type: string
+    sql: ${TABLE}.descriptor  
+    
   - dimension: formatted_amount
     label: 'Amount'
     view_label: ''

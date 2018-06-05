@@ -178,7 +178,37 @@
           WHEN ${state} = 22680 THEN 'Chargeback'
           ELSE 'No Status'
         END
-           
+  
+  - dimension: conversion
+    label: 'Conversion'
+    type: string
+    sql: CASE 
+          WHEN ${state} = 22000 THEN 'Pending'
+          WHEN ${state} = 22100 THEN 'Pending'
+          WHEN ${state} = 22110 THEN 'Pending'
+          WHEN ${state} = 22111 THEN 'Pending'
+          WHEN ${state} = 22150 THEN 'Pending'
+          WHEN ${state} = 22175 THEN 'Pending'
+          WHEN ${state} = 22180 THEN 'Pending'
+          WHEN ${state} = 22190 THEN 'Pending'
+          WHEN ${state} = 22195 THEN 'Pending'
+          WHEN ${state} = 22200 THEN 'Pending'
+          WHEN ${state} = 22300 THEN 'Pending'
+          WHEN ${state} = 22400 THEN 'Pending'
+          WHEN ${state} = 22410 THEN 'Pending'
+          WHEN ${state} = 22420 THEN 'Pending'
+          WHEN ${state} = 22500 THEN 'Successful'
+          WHEN ${state} = 22575 THEN 'Unsuccessful'
+          WHEN ${state} = 22600 THEN 'Unsuccessful'
+          WHEN ${state} = 22610 THEN 'Unsuccessful'
+          WHEN ${state} = 22650 THEN 'Unsuccessful'
+          WHEN ${state} = 22670 THEN 'Unsuccessful'
+          WHEN ${state} = 22700 THEN 'Pending'
+          WHEN ${state} = 22800 THEN 'Successful'
+          WHEN ${state} = 22680 THEN 'Unsuccessful'
+          ELSE 'No Status'
+        END
+        
   - dimension: tax_invoice
     type: yesno
     sql: ${TABLE}.tax_invoice

@@ -894,6 +894,13 @@
       type: left_outer 
       sql_on: ${milestones.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
+      
+    - join: account_marketplaces
+      view_label: 'Account Marketplace'
+      from: marketplaces
+      type: left_outer 
+      sql_on: ${accounts.marketplace_id} = ${account_marketplaces.id}
+      relationship: many_to_one
 
     - join: payment_types
       type: left_outer 

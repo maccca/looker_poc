@@ -198,7 +198,7 @@
           WHEN ${state} = 22410 THEN 'Pending'
           WHEN ${state} = 22420 THEN 'Pending'
           WHEN ${state} = 22500 THEN 'Successful'
-          WHEN ${state} = 22575 THEN 'Unsuccessful'
+          WHEN ${state} = 22575 THEN 'Pending'
           WHEN ${state} = 22600 THEN 'Unsuccessful'
           WHEN ${state} = 22610 THEN 'Unsuccessful'
           WHEN ${state} = 22650 THEN 'Unsuccessful'

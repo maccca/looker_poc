@@ -223,10 +223,10 @@
     sql: ${TABLE}.uuid
     links:
     - label: Ops Center
-      url: https://ops.promisepay.com/milestones/{{ value }}
+      url: https://ops.platforms.prod.assemblypayments.com/milestones/{{ value }}
       icon_url: http://downoruprightnow.com/favicon/promisepay.com.jpg
     html: |
-      <a href="https://ops.promisepay.com/milestones/{{ value }}">{{ value }}</a>
+      <a href="https://ops.platforms.prod.assemblypayments.com/milestones/{{ value }}">{{ value }}</a>
 
   - measure: count
     type: count

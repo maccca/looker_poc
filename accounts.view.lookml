@@ -32,7 +32,7 @@
 
   - dimension: amount
     type: number
-    sql: ${TABLE}.amount / 100
+    sql: ${TABLE}.amount / 100.00
     value_format_name: usd
 
   - dimension: bank_account_details
@@ -68,6 +68,11 @@
     type: number
     # hidden: true
     sql: ${TABLE}.milestone_id
+    
+  - dimension: marketplace_id
+    type: number
+    # hidden: true
+    sql: ${TABLE}.marketplace_id
 
   - dimension: payout_currency_id
     type: number

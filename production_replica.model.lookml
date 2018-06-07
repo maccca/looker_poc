@@ -58,3 +58,6 @@
   
 - explore: payment_restrictions
   extends: payment_restrictions_base
+  
+- explore: month_end_report
+  extends: month_end_report_base

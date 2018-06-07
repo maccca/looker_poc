@@ -351,34 +351,319 @@
       type: left_outer
       sql_on: ${milestone_account.id} = ${transaction_references.account_id}
       relationship: one_to_one  
+#       
+#     - join: payment_in_transactions
+#       view_label: 'Payment In Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       sql_on: (${milestone_account.id} = ${payment_in_transactions.account_id}) AND (${payment_in_transactions.amount} > 0)
+#       relationship: one_to_many
+#       
+#     - join: payment_in_related_transactions
+#       view_label: 'Payment In Related Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       fields: []
+#       sql_on: (${payment_in_transactions.related_transaction_id} = ${payment_in_related_transactions.id}) AND (${payment_in_related_transactions.amount} < 0)
+#       relationship: one_to_many
+#       
+#     - join: payment_in_account
+#       view_label: 'Payment In Account'
+#       from: accounts
+#       type: inner
+#       fields: [account_type]
+#       sql_on: ${payment_in_account.id} = ${payment_in_related_transactions.account_id}
+#       relationship: one_to_one
+#       
+#     - join: payment_out_transactions
+#       view_label: 'Payment Out Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       sql_on: (${milestone_account.id} = ${payment_out_transactions.account_id}) AND (${payment_out_transactions.amount} < 0)
+#       relationship: one_to_many
+#       
+#     - join: payment_out_related_transactions
+#       view_label: 'Payment Out Related Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       fields: []
+#       sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_related_transactions.id}) AND (${payment_out_related_transactions.amount} > 0)
+#       relationship: one_to_many
+#       
+#     - join: payment_out_account
+#       view_label: 'Payment Out Account'
+#       from: accounts
+#       type: left_outer
+#       fields: []
+#       sql_on: ${payment_out_account.id} = ${payment_out_related_transactions.account_id}
+#       relationship: one_to_one
+#       
+#     - join: payment_out_seller_account
+#       view_label: 'Payment Out Seller Account'
+#       from: accounts
+#       type: left_outer
+#       fields: []
+#       sql_on: ${payment_out_seller_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_seller_account.legal_entity_id} = ${contractor_legal_entities.id}
+#       relationship: one_to_one
+#       
+#     - join: payment_out_buyer_account
+#       view_label: 'Payment Out Buyer Account'
+#       from: accounts
+#       type: left_outer
+#       fields: []
+#       sql_on: ${payment_out_buyer_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_buyer_account.legal_entity_id} = ${client_legal_entities.id}
+#       relationship: one_to_one
+#     
+#     - join: payment_out_mp_account
+#       view_label: 'Payment Out Marketplace Account'
+#       from: accounts
+#       type: left_outer
+#       fields: []
+#       sql_on: ${payment_out_mp_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_mp_account.legal_entity_id} = ${marketplaces.legal_entity_id}
+#       relationship: one_to_one
+#    
+#     - join: payment_out_seller_related_transactions
+#       view_label: 'Payment Out Seller Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       fields: [total_amount]
+#       sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_seller_related_transactions.id}) AND (${payment_out_seller_related_transactions.account_id} = ${payment_out_seller_account.id})
+#       relationship: one_to_many
+#       
+#     - join: payment_out_mp_related_transactions
+#       view_label: 'Payment Out Marketplace Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       fields: [total_amount]
+#       sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_mp_related_transactions.id}) AND (${payment_out_mp_related_transactions.account_id} = ${payment_out_mp_account.id})
+#       relationship: one_to_many
+#    
+#     - join: payment_out_buyer_related_transactions
+#       view_label: 'Payment Out Buyer Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       fields: [total_amount]
+#       sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_buyer_related_transactions.id}) AND (${payment_out_buyer_related_transactions.account_id} = ${payment_out_buyer_account.id})
+#       relationship: one_to_many
+#       
+#     - join: all_item_transactions
+#       view_label: 'All Item Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       sql_on: (${all_item_transactions.object_id} = ${milestones.id}) AND (${all_item_transactions.object_type} = 'Milestone')
+#       relationship: one_to_many
+#     
+#     - join: assembly_account
+#       view_label: 'Assembly Account'
+#       from: accounts
+#       type: left_outer
+#       fields: []
+#       sql_on: ${assembly_account.id} = ${all_item_transactions.account_id} AND ${assembly_account.account_type_id} = 1000
+#       relationship: one_to_one
+#       
+#     - join: assembly_fees
+#       view_label: 'Assembly Fee Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       sql_on: (${assembly_fees.object_id} = ${milestones.id}) AND (${assembly_fees.object_type} = 'Milestone') AND (${assembly_fees.account_id} = ${assembly_account.id})
+#       relationship: one_to_many
       
-      
-    - join: item_transactions
-      view_label: 'Transaction Entries'
-      from: transaction_entries
-      type: left_outer
-      sql_on: ${milestone_account.id} = ${item_transactions.account_id}
-      relationship: one_to_many
-      
-    - join: item_related_transactions
-      view_label: 'Transaction Entries'
-      from: transaction_entries
-      type: left_outer
-      sql_on: ${item_related_transactions.id} = ${item_transactions.related_transaction_id} AND ${item_related_transactions.amount} < 0 
-      relationship: one_to_many  
-      
-    - join: payment_account
-      view_label: 'Payment Account'
-      from: accounts
-      type: inner
-      sql_on: ${payment_account.id} = ${item_related_transactions.account_id}
-      relationship: one_to_one
-    
     - join: currencies
       type: left_outer
       sql_on: ${accounts.currency_id} = ${currencies.id}
       relationship: many_to_one
-
+      
+- explore: month_end_report_base
+  access_filter_fields: [marketplaces.id]
+  from: transaction_entries
+  view: transaction_entries
+  view_label: 'Assembly Fees'
+  extension: required
+  sql_always_where: (${transaction_entries.object_id} = ${milestones.id}) AND (${transaction_entries.object_type} = 'Milestone') AND (${transaction_entries.account_id} = ${assembly_account.id})
+  joins:
+    - join: milestones
+      view_label: 'Items'
+      from: milestones
+      type: left_outer
+      sql_on: (${transaction_entries.object_id} = ${milestones.id}) AND (${transaction_entries.object_type} = 'Milestone')
+      relationship: many_to_one
+      
+    - join: contractor_legal_entities
+      view_label: 'Payee Legal Entity (Seller)'
+      from: legal_entities
+      type: left_outer
+      fields: []
+      sql_on: ${contractor_legal_entities.id} = ${milestones.contractor_legal_entity_id}
+      relationship: many_to_one
+      
+    - join: client_legal_entities
+      view_label: 'Payer Legal Entity (Buyer)'
+      from: legal_entities
+      type: left_outer
+      fields: []
+      sql_on: ${client_legal_entities.id} = ${milestones.client_legal_entity_id}
+      relationship: many_to_one  
+      
+    - join: contractor_user
+      view_label: 'Payee User (Seller)'
+      from: users
+      type: left_outer
+      fields: []
+      sql_on: ${contractor_legal_entities.principal_id} = ${contractor_user.id}
+      relationship: many_to_one
+      
+    - join: client_user
+      view_label: 'Payer User (Buyer)'
+      from: users
+      type: left_outer
+      fields: []
+      sql_on: ${client_legal_entities.principal_id} = ${client_user.id}
+      relationship: many_to_one
+      
+    - join: item_account
+      view_label: 'Item Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${milestones.id} = ${item_account.milestone_id}
+      relationship: one_to_one
+      
+    - join: marketplaces
+      type: left_outer
+#       fields: [name]
+      sql_on: ${marketplaces.id} = ${milestones.marketplace_id}
+      relationship: one_to_many
+      
+    - join: transaction_references
+      view_label: 'Item References'
+      from: transaction_references
+      fields: []
+      type: left_outer
+      sql_on: ${item_account.id} = ${transaction_references.account_id}
+      relationship: one_to_one  
+      
+    - join: payment_in_transactions
+      view_label: 'Payment In Transactions'
+      from: transaction_entries
+      type: inner
+      sql_on: (${item_account.id} = ${payment_in_transactions.account_id}) AND (${payment_in_transactions.amount} > 0) AND (${payment_in_transactions.is_refund} != 1) AND (${payment_in_transactions.description} NOT LIKE CONCAT('%Refund Item ', ${milestones.external_id}, '%'))
+      relationship: one_to_one
+      
+    - join: payment_in_related_transactions
+      view_label: 'Payment In Related Transactions'
+      from: transaction_entries
+      type: inner
+      fields: []
+      sql_on: (${payment_in_transactions.related_transaction_id} = ${payment_in_related_transactions.id}) AND (${payment_in_related_transactions.amount} < 0) AND (${item_account.id} != ${payment_in_related_transactions.account_id}) AND (${payment_in_related_transactions.is_refund} != 1)
+      relationship: one_to_one
+      
+    - join: payment_in_account
+      view_label: 'Payment In Account'
+      from: accounts
+      type: left_outer
+      fields: [account_type]
+      sql_on: (${payment_in_account.id} = ${payment_in_related_transactions.account_id}) AND (${payment_in_account.id} != ${payment_in_transactions.account_id})
+      relationship: many_to_one
+      
+    - join: payment_out_transactions
+      view_label: 'Payment Out Transactions'
+      from: transaction_entries
+      type: left_outer
+      sql_on: (${item_account.id} = ${payment_out_transactions.account_id}) AND (${payment_out_transactions.amount} < 0)
+      relationship: one_to_many
+      
+    - join: payment_out_related_transactions
+      view_label: 'Payment Out Related Transactions'
+      from: transaction_entries
+      type: left_outer
+      fields: []
+      sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_related_transactions.id}) AND (${payment_out_related_transactions.amount} > 0)
+      relationship: one_to_many
+      
+    - join: payment_out_account
+      view_label: 'Payment Out Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${payment_out_account.id} = ${payment_out_related_transactions.account_id}
+      relationship: one_to_one
+      
+    - join: payment_out_seller_account
+      view_label: 'Payment Out Seller Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${payment_out_seller_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_seller_account.legal_entity_id} = ${contractor_legal_entities.id}
+      relationship: one_to_one
+      
+    - join: payment_out_buyer_account
+      view_label: 'Payment Out Buyer Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${payment_out_buyer_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_buyer_account.legal_entity_id} = ${client_legal_entities.id}
+      relationship: one_to_one
+    
+    - join: payment_out_mp_account
+      view_label: 'Payment Out Marketplace Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${payment_out_mp_account.id} = ${payment_out_related_transactions.account_id} AND ${payment_out_mp_account.legal_entity_id} = ${marketplaces.legal_entity_id}
+      relationship: one_to_one
+   
+    - join: payment_out_seller_related_transactions
+      view_label: 'Payment Out Seller Transactions'
+      from: transaction_entries
+      type: left_outer
+      fields: [total_amount]
+      sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_seller_related_transactions.id}) AND (${payment_out_seller_related_transactions.account_id} = ${payment_out_seller_account.id})
+      relationship: one_to_many
+      
+    - join: payment_out_mp_related_transactions
+      view_label: 'Payment Out Marketplace Transactions'
+      from: transaction_entries
+      type: left_outer
+      fields: [total_amount]
+      sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_mp_related_transactions.id}) AND (${payment_out_mp_related_transactions.account_id} = ${payment_out_mp_account.id})
+      relationship: one_to_many
+   
+    - join: payment_out_buyer_related_transactions
+      view_label: 'Payment Out Buyer Transactions'
+      from: transaction_entries
+      type: left_outer
+      fields: [total_amount]
+      sql_on: (${payment_out_transactions.related_transaction_id} = ${payment_out_buyer_related_transactions.id}) AND (${payment_out_buyer_related_transactions.account_id} = ${payment_out_buyer_account.id})
+      relationship: one_to_many
+      
+    - join: all_item_transactions
+      view_label: 'All Item Transactions'
+      from: transaction_entries
+      type: left_outer
+      fields: []
+      sql_on: (${all_item_transactions.object_id} = ${milestones.id}) AND (${all_item_transactions.object_type} = 'Milestone')
+      relationship: one_to_many
+    
+    - join: assembly_account
+      view_label: 'Assembly Account'
+      from: accounts
+      type: left_outer
+      fields: []
+      sql_on: ${assembly_account.id} = ${all_item_transactions.account_id} AND ${assembly_account.account_type_id} = 1000
+      relationship: one_to_one
+      
+#     - join: assembly_fees
+#       view_label: 'Assembly Fee Transactions'
+#       from: transaction_entries
+#       type: left_outer
+#       sql_on: (${assembly_fees.object_id} = ${milestones.id}) AND (${assembly_fees.object_type} = 'Milestone') AND (${assembly_fees.account_id} = ${assembly_account.id})
+#       relationship: one_to_many
+      
+    - join: currencies
+      type: left_outer
+      sql_on: ${item_account.currency_id} = ${currencies.id}
+      relationship: many_to_one
+    
 - explore: transaction_entries_base
   access_filter_fields: [marketplaces.id]
   from: transaction_entries
@@ -607,7 +892,7 @@
 
     - join: marketplaces
       type: left_outer 
-      sql_on: ${milestones.marketplace_id} = ${marketplaces.id}
+      sql_on: ${accounts.marketplace_id} = ${marketplaces.id}
       relationship: many_to_one
 
     - join: payment_types
